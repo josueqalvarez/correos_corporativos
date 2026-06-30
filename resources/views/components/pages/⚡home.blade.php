@@ -9,13 +9,10 @@ new class extends Component {
 
 <x-layouts.index>
     <!-- Hero Section -->
-    <section class="relative overflow-hidden bg-primary py-section-padding md:min-h-[819px] flex items-center"
+    <section class="relative overflow-hidden bg-primary h-full flex items-center"
         id="inicio">
-        <div class="absolute inset-0 opacity-10">
-
-        </div>
         <div
-            class="max-w-container-max mx-auto px-margin-mobile md:px-8 grid md:grid-cols-2 gap-gutter items-center relative z-10">
+            class="h-full max-w-container-max mx-auto px-margin-mobile md:px-8 grid md:grid-cols-2 gap-gutter items-center relative z-10">
             <div class="text-on-primary space-y-stack-lg">
                 <h1 class="font-headline-xl text-headline-xl leading-tight">
                     Correos corporativos para tu negocio, 
@@ -31,15 +28,14 @@ new class extends Component {
                         <span class="material-symbols-outlined">chat</span> Solicitar información por WhatsApp
                     </a>
                     <a class="border border-on-primary text-on-primary px-stack-lg py-4 rounded-lg font-bold flex items-center justify-center hover:bg-on-primary/10 transition-all"
-                        href="#que-incluye">
+                        href="/que-incluye" livewire:navigate>
                         Ver qué incluye
                     </a>
                 </div>
             </div>
             <div class="hidden md:block">
                 <div class="relative w-full aspect-square rounded-3xl overflow-hidden shadow-2xl">
-                    <img class="w-full h-full object-cover"
-                        data-alt="A professional workspace with a sleek laptop displaying a clean email inbox interface on the screen. The setting is a minimalist office with soft blue lighting and high-quality textures. The mood is highly professional and technically advanced, conveying reliability and expertise in corporate infrastructure."
+                    <img class="w-full h-3/4 object-cover"
                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbUlXZzA5THEjFJUgZlUxR812brrRVRVwkFa9v3rExuuwxUPDeYjQ0S-ryKs5-CwTUeW7XUIE5SQUf8TRI0YGL01gKwnozlwTzPjtWkZNCBPT4xaFyFbCJKq9ji7FG0Yg_wGI0VdZORaqvJJSGx-hfrr5jSXfMMh7jiG9wc2ue2y56E9EGQmKwwKAcCHFESlWOmQo9DO6-NdGV5dq8FpfdpfdxbhJkNI97tLXXvvBEWFion8H1hTTohlfIfOL9C2cPKfxElhbZ94V5" />
                 </div>
             </div>
