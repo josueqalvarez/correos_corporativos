@@ -27,7 +27,7 @@ new class extends Component {
                     <p class="font-body-md text-body-md text-on-surface-variant mb-stack-md">La forma más rápida de
                         obtener
                         asistencia técnica directa con nuestros expertos.</p>
-                    <a class="flex items-center justify-center gap-3 w-full bg-[#25D366] text-white py-4 rounded-lg font-bold text-lg shadow-sm hover:opacity-90 active:scale-95 transition-all"
+                    <a class="flex items-center justify-center gap-3 w-full bg-secondary text-white py-4 rounded-lg font-bold text-lg shadow-sm hover:opacity-90 active:scale-95 transition-all"
                         href="https://wa.me/1234567890">
                         <span class="material-symbols-outlined text-2xl"
                             style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
@@ -132,10 +132,10 @@ new class extends Component {
                     </div>
                 </form>
                 <!-- Status Message Placeholder -->
-                <div class="hidden mt-6 p-4 rounded-lg bg-secondary-container text-on-secondary-container flex items-center gap-3"
+                <div class="hidden mt-6 p-4 rounded-lg bg-secondary-container text-on-secondary-container  items-center gap-3"
                     id="formStatus">
-                    <span class="material-symbols-outlined">check_circle</span>
-                    <p class="font-body-md text-body-md">¡Gracias! Hemos recibido tu mensaje y te contactaremos en
+                    <span class="inline-block material-symbols-outlined">check_circle</span>
+                    <p class="inline-block font-body-md text-body-md">¡Gracias! Hemos recibido tu mensaje y te contactaremos en
                         breve.
                     </p>
                 </div>
