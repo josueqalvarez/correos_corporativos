@@ -6,7 +6,7 @@ new class extends Component {
     //
 
     public array $routes = [
-        '/' => 'Inicio',
+        'home' => 'Inicio',
         'blog' => 'Blog',
         'que-incluye' => '¿Qué incluye?',
         'dominio-y-hosting-email' => 'Dominio y Hosting Email',
@@ -21,12 +21,10 @@ new class extends Component {
 };
 ?>
 
-
-
-{{-- Navigation --}}
 <nav class="hidden md:flex gap-8">
     @foreach ($routes as $route => $label)
-        <a class="{{ request()->is($route) ? $currentRoute : $defaultRoute }}" href="{{ $route }}" wire:navigate>
+        <a class="{{ request()->routeIs($route.'*') ? $currentRoute : $defaultRoute }}" 
+            href="{{ route($route) }}" wire:navigate>
             {{ $label }}
         </a>
     @endforeach

@@ -1,13 +1,15 @@
 <?php
 
 use Livewire\Component;
+use Livewire\Attributes\Layout;
 
 new class extends Component {
+    #[Layout('layouts.index')]
     //
 };
 ?>
 
-<x-layouts.index>
+<div>
     <!-- Hero Section -->
     <section class="relative overflow-hidden pt-12 pb-section-padding">
         <div class="max-w-container-max mx-auto px-margin-x grid lg:grid-cols-2 gap-stack-lg items-center">
@@ -522,4 +524,4 @@ new class extends Component {
                 href="#">Más información</a>
         </div>
     </div>  
-</x-layouts.index>
+</div>

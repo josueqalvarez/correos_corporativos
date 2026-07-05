@@ -1,13 +1,14 @@
 <?php
 
 use Livewire\Component;
+use Livewire\Attributes\Layout;
 
 new class extends Component {
-    //
+    #[Layout('layouts.index')]
 };
 ?>
 
-<x-layouts.index>
+<div>
 
     <!-- Hero Section / Animated Background -->
     <section class="relative h-[400px] flex items-center justify-center overflow-hidden">
@@ -215,4 +216,4 @@ new class extends Component {
             </div>
         </div>
     </section>
-</x-layouts.index>
+</div>

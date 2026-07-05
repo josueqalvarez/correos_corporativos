@@ -1,13 +1,41 @@
 <?php
 
 use Livewire\Component;
+use Livewire\Attributes\Layout;
 
 new class extends Component {
-    //
+    #[Layout('components.layouts.index')]
+    public array $bd = [
+        [
+            'title' => 'Guía completa para configurar Zoho Mail con tu dominio propio',
+            'category' => 'DNS & Configuración',
+            'date' => '24 Mayo, 2024',
+            'reading_time' => 5,
+            'content' => 'Descubre cómo mover toda tu infraestructura de correo entre proveedores sin arriesgar la integridad de tu información histórica.',
+            'description' => 'Aprende a dominar las mejores herramientas de comunicación empresarial. Guías expertas sobre Zoho Mail, Google Workspace y optimización de infraestructura DNS.',
+            'img' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuBp9aQbwuo3jjONEuoSSfPqwxbeliaUGH0hfdOkXL5dAEbi-pY-NZHh2Rayg_Hzxb15-xxAOaqxpbBW3d-Nm9HHOIsMtnf9k8IC7qBeS_qW7-Z8B9BhWN30oh012EVm_-D_kkSiVaV7IF3TupT8X4ddyDajrN7R5Ri1kfftwXA0ZpX1eH-yYtNrDJXlWkxLxsXxrkkKOgjR7uKe6KiFTDGXM00wz-rzBLpztvvnR5mH35A77P2a3S40EA',
+        ],
+    ];
+
+    public string $title;
+
+    public array $item_searched = [];
+
+    public function mount(string $title)
+    {
+        $this->title = urldecode($title);
+
+        foreach ($this->bd as $item) {
+            if ($item['title'] === $this->title) {
+                $this->item_searched = $item;
+                break;
+            }
+        }
+    }
 };
 ?>
 
-<x-layouts.index>
+<div>
     <!-- Breadcrumbs -->
     <div
         class="grid grid-cols-1 lg:grid-cols-12 gap-stack-lg items-start max-w-[1600px] py-section-padding mx-auto px-8 md:px-32 pt-">
@@ -24,23 +52,23 @@ new class extends Component {
                     </div>
                     <h1
                         class="font-headline-lg text-headline-xl md:text-display-xl-mobile lg:text-display-xl mb-6 text-primary leading-tight ">
-                        Guía completa para configurar Zoho Mail con tu dominio propio
+                        {{ $item_searched['title'] }}
                     </h1>
                     <div
                         class="flex flex-wrap items-center gap-6 text-on-surface-variant font-label-mono text-label-mono">
-                        <div class="flex items-center gap-2">
+                        {{-- <div class="flex items-center gap-2">
                             <div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center">
                                 <span class="material-symbols-outlined text-on-secondary-container">person</span>
                             </div>
                             <span>Por Staff MailCorp</span>
-                        </div>
+                        </div> --}}
                         <div class="flex items-center gap-2">
                             <span class="material-symbols-outlined">calendar_today</span>
-                            <span>24 Mayo, 2024</span>
+                            <span>{{ $item_searched['date'] }}</span>
                         </div>
                         <div class="flex items-center gap-2">
                             <span class="material-symbols-outlined">schedule</span>
-                            <span>12 min de lectura</span>
+                            <span>{{ $item_searched['reading_time'] }} min de lectura</span>
                         </div>
                     </div>
                 </div>
@@ -49,14 +77,12 @@ new class extends Component {
             <div class="rounded-3xl overflow-hidden mb-12 shadow-2xl">
                 <img class="w-full h-auto aspect-video object-cover"
                     data-alt="A professional high-fidelity digital rendering of a sleek laptop displaying a clean Zoho Mail interface with a customized business domain email. The scene is set in a modern, brightly lit office environment with soft glassmorphism accents and a corporate navy and teal color palette. Soft ambient light illuminates the silver laptop while technical network diagrams float subtly in the blurred background, conveying a sense of advanced cloud infrastructure and reliability."
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXyETBQmFMXgF2TlOxx2R6JPWsIZD0UaMTxj_WRrHRNvS9mfDZIFDi5Y6ljTdbm-ZlLBCZXLJVqW7Dd7IsBK_53XdbPAgGd1b2JkTVnSOeeJ3hKmAHBTbaLSRFQExtuZZk5lAsSNWpN7LpbJeucP6d7dTO8XmUSXYGXxQLQ9hKw6EjCkdeHZdOjlyCKF_NZZqcBTd_Pp7jF4coputEVROlogxGO7KhPu2RkbcDXdIKRnBfllSOkJYn-A" />
+                    src="{{ $item_searched['img'] }}" />
             </div>
             <!-- Content Intro -->
             <div class="prose prose-lg max-w-none text-on-surface-variant leading-relaxed">
                 <p class="text-subheading font-subheading mb-8">
-                    Configurar el correo electrónico de tu empresa puede parecer un desafío técnico intimidante, pero
-                    con Zoho Mail y esta guía paso a paso, tendrás una infraestructura de nivel corporativo funcionando
-                    en cuestión de minutos.
+                    {{ $item_searched['description'] }}
                 </p>
                 <!-- Table of Contents (Mobile Only) -->
                 <div class="lg:hidden bg-surface-container p-6 rounded-2xl mb-8">
@@ -265,7 +291,7 @@ new class extends Component {
     </div>
     <!-- Sticky Footer CTA Banner -->
     <section
-        class="mt-section-padding bg-navy-container text-on-tertiary-fixed p-12 rounded-[40px] flex flex-col md:flex-row items-center justify-between gap-8 max-w-[1400px] py-section-padding mx-auto px-8 md:px-32 mb-section-padding">
+        class="mt-section-padding bg-navy-container text-on-tertiary-fixed p-12 rounded-[40px] flex flex-col md:flex-row items-center justify-between gap-8 max-w-350 py-section-padding mx-auto px-8 md:px-32 mb-section-padding">
         <div class="text-center md:text-left">
             <h2 class="font-headline-lg text-headline-lg mb-2 text-on-primary">¿Prefieres que nosotros configuremos
                 todo por ti?</h2>
@@ -278,4 +304,4 @@ new class extends Component {
             WhatsApp Corporativo
         </a>
     </section>
-</x-layouts.index>
+</div>

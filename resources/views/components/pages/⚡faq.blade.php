@@ -1,13 +1,14 @@
 <?php
 
 use Livewire\Component;
+use Livewire\Attributes\Layout;
 
 new class extends Component {
-    //
+    #[Layout('layouts.index')]
 };
 ?>
 
-<x-layouts.index>
+<div>
     <!-- Hero Section -->
     <section class="relative overflow-hidden bg-primary py-24 text-center">
 
@@ -320,4 +321,4 @@ new class extends Component {
             </div>
         </div>
     </section> 
-</x-layouts.index>
+</div>
