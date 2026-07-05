@@ -9,7 +9,7 @@ new class extends Component {
 
 <div>
     <!-- Hero Section -->
-    <section class="relative overflow-hidden bg-primary py-section-padding md:min-h-[819px] flex items-center"
+    <section class="relative overflow-hidden bg-primary py-section-padding md:min-h-204.75 flex items-center"
         id="inicio">
         <div class="absolute inset-0 opacity-10">
 
@@ -193,9 +193,9 @@ new class extends Component {
             </div>
             <div class="relative flex flex-col md:flex-row justify-between gap-12">
                 <!-- Progress Line (Desktop) -->
-                <div class="hidden md:block absolute top-12 left-0 w-full h-[2px] bg-primary/30 z-0"></div>
+                <div class="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-primary/30 z-0"></div>
                 <!-- Step 1 -->
-                <div class="relative z-10 flex flex-col items-center text-center max-w-[200px] mx-auto md:mx-0">
+                <div class="relative z-10 flex flex-col items-center text-center max-w-50 mx-auto md:mx-0">
                     <div
                         class="w-24 h-24 rounded-full bg-primary flex items-center justify-center border-4 border-primary-container mb-6">
                         <span class="material-symbols-outlined text-3xl">language</span>
@@ -205,7 +205,7 @@ new class extends Component {
                         marca.</p>
                 </div>
                 <!-- Step 2 -->
-                <div class="relative z-10 flex flex-col items-center text-center max-w-[200px] mx-auto md:mx-0">
+                <div class="relative z-10 flex flex-col items-center text-center max-w-50 mx-auto md:mx-0">
                     <div
                         class="w-24 h-24 rounded-full bg-primary flex items-center justify-center border-4 border-primary-container mb-6">
                         <span class="material-symbols-outlined text-3xl">settings</span>
@@ -215,7 +215,7 @@ new class extends Component {
                     </p>
                 </div>
                 <!-- Step 3 -->
-                <div class="relative z-10 flex flex-col items-center text-center max-w-[200px] mx-auto md:mx-0">
+                <div class="relative z-10 flex flex-col items-center text-center max-w-50 mx-auto md:mx-0">
                     <div
                         class="w-24 h-24 rounded-full bg-primary flex items-center justify-center border-4 border-primary-container mb-6">
                         <span class="material-symbols-outlined text-3xl">add_card</span>
@@ -225,7 +225,7 @@ new class extends Component {
                         seguras.</p>
                 </div>
                 <!-- Step 4 -->
-                <div class="relative z-10 flex flex-col items-center text-center max-w-[200px] mx-auto md:mx-0">
+                <div class="relative z-10 flex flex-col items-center text-center max-w-50 mx-auto md:mx-0">
                     <div
                         class="w-24 h-24 rounded-full bg-primary flex items-center justify-center border-4 border-primary-container mb-6">
                         <span class="material-symbols-outlined text-3xl">devices</span>
@@ -235,7 +235,7 @@ new class extends Component {
                         móvil.</p>
                 </div>
                 <!-- Step 5 -->
-                <div class="relative z-10 flex flex-col items-center text-center max-w-[200px] mx-auto md:mx-0">
+                <div class="relative z-10 flex flex-col items-center text-center max-w-50 mx-auto md:mx-0">
                     <div
                         class="w-24 h-24 rounded-full bg-primary flex items-center justify-center border-4 border-primary-container mb-6">
                         <span class="material-symbols-outlined text-3xl">key</span>
@@ -314,7 +314,7 @@ new class extends Component {
     <!-- Final CTA -->
     <section class="py-section-padding px-margin-mobile">
         <div
-            class="max-w-[1000px] mx-auto bg-primary rounded-[32px] overflow-hidden relative p-12 md:p-20 text-center">
+            class="max-w-250 mx-auto bg-primary rounded-4xl overflow-hidden relative p-12 md:p-20 text-center">
             <div class="absolute inset-0 opacity-20 pointer-events-none">
 
             </div>
@@ -337,7 +337,7 @@ new class extends Component {
     </section>
     <!-- FAQ Section -->
     <section class="py-section-padding bg-surface-container-low" id="faq">
-        <div class="max-w-[800px] mx-auto px-margin-mobile">
+        <div class="max-w-200 mx-auto px-margin-mobile">
             <h2 class="font-headline-lg text-headline-lg text-primary text-center mb-12">Preguntas frecuentes</h2>
             <div class="space-y-4">
                 <details

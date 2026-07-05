@@ -9,7 +9,7 @@ new class extends Component {
 
 <x-layouts.index>
     <!-- Hero Section -->
-    <section class="relative h-[400px] flex items-center justify-center overflow-hidden bg-primary-container">
+    <section class="relative h-100 flex items-center justify-center overflow-hidden bg-primary-container">
 
         <div class="relative z-10 text-center px-margin-mobile">
             <h1
@@ -212,8 +212,8 @@ new class extends Component {
             </div>
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
                 <!-- Featured Story -->
-                <div class="lg:col-span-8 group relative overflow-hidden rounded-xl h-[400px]">
-                    <div class="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent z-10"></div>
+                <div class="lg:col-span-8 group relative overflow-hidden rounded-xl h-100">
+                    <div class="absolute inset-0 bg-linear-to-t from-primary/90 to-transparent z-10"></div>
                     <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
                         data-alt="A wide-angle shot of a vibrant, modern coworking hub with glass walls and tech workers, bright afternoon sun filtering through, high-end corporate lifestyle photography, navy blue and white color palette."
                         style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBlXiEcw_soQsZvs5-zLJvNDOG7tXM9jddxBeVYZ7otj-jMJNuEuOMvo3Lw6ANXMKHdfGTDhJvHSqdKsKydMjkRR7cG2haYe2ZmG4qeLeKdGOG2DTemSc6gJDSs2QLgawxpiuXmDBRDmzNGYGh--1Z0Ix-iPXIhrOxKxwjoZTEPXOTpt2WGB9PLQkvhH55GDTsf1-gJAY5b8yFHzd251J7GWJuYBaOfzn0-IfnbyyEa-dLjdcRsstJr9CHFQP5myJu5e5vojWYhUh02')">
@@ -264,7 +264,7 @@ new class extends Component {
                 </p>
                 <div class="flex flex-col md:flex-row justify-center gap-4">
                     <button
-                        class="bg-[#25D366] text-white font-bold py-4 px-10 rounded-xl font-label-sm text-label-sm hover:opacity-90 active:scale-95 transition-all">
+                        class="bg-secondary text-white font-bold py-4 px-10 rounded-xl font-label-sm text-label-sm hover:opacity-90 active:scale-95 transition-all">
                         Empezar Configuración
                     </button>
                     <button

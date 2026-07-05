@@ -127,7 +127,7 @@ new class extends Component {
                 </ul>
                 <!-- Pro Tip Box -->
                 <div
-                    class="bg-mint-container/20 border-l-4 border-success-teal p-8 rounded-r-3xl my-10 bg-mint-container">
+                    class=" border-l-4 border-success-teal p-8 rounded-r-3xl my-10 bg-mint-container">
                     <div class="flex items-start gap-4">
                         <div class="p-2 bg-success-teal text-on-primary rounded-xl">
                             <span class="material-symbols-outlined">lightbulb</span>

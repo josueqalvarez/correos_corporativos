@@ -43,7 +43,7 @@ new class extends Component {
         <div class="absolute inset-0 z-0 opacity-20 pointer-events-none">
 
         </div>
-        <div class="max-w-[1280px] mx-auto px-8 md:px-32 relative z-10 flex flex-col items-center text-center">
+        <div class="max-w-container-max mx-auto px-8 md:px-32 relative z-10 flex flex-col items-center text-center">
             <div
                 class="inline-flex items-center gap-2 px-3 py-1 bg-mint-container/30 text-on-mint-container rounded-full mb-8">
                 <span class="font-label-mono text-label-mono uppercase tracking-wider">Centro de Conocimiento</span>
@@ -73,7 +73,7 @@ new class extends Component {
         <livewire:blog-buscador :search_query="$search_query" />
     @else
         <section class="py-section-padding bg-surface-container-low/50">
-            <div class="max-w-[1280px] mx-auto px-8 md:px-32">
+            <div class="max-w-container-max mx-auto px-8 md:px-32">
                 <div class="flex justify-between items-end mb-12">
                     <div>
                         <h2 class="font-headline-lg text-headline-lg mb-2">Artículos destacados</h2>
@@ -100,7 +100,7 @@ new class extends Component {
                                 <img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                     data-alt="A clean, minimalist high-tech visualization of digital signals and envelopes flying through a stylized blue and teal sky, representing secure enterprise email infrastructure. The style is modern, sleek, and high-fidelity, resembling Stripe's marketing aesthetic with smooth gradients and soft ambient lighting."
                                     src="{{ $feature_article['img'] }}" />
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                                <div class="absolute inset-0 bg-linear-to-t from-black/20 to-transparent"></div>
                             </div>
                             <div class="p-8 flex flex-col justify-center">
                                 <div class="flex items-center gap-3 mb-6">
@@ -145,7 +145,7 @@ new class extends Component {
         </section>
         <!-- Main Content Area -->
         <section class="py-section-padding">
-            <div class="max-w-[1280px] mx-auto px-8 md:px-32 grid grid-cols-1 lg:grid-cols-12 gap-16">
+            <div class="max-w-container-max mx-auto px-8 md:px-32 grid grid-cols-1 lg:grid-cols-12 gap-16">
                 <!-- Latest Articles -->
                 <div class="lg:col-span-8">
                     <h2 class="font-headline-lg text-headline-lg mb-10">Últimos artículos</h2>
@@ -233,7 +233,7 @@ new class extends Component {
             </div>
         </section>
         <!-- CTA Section -->
-        <section class="max-w-[1280px] mx-auto px-8 md:px-32 mb-section-padding">
+        <section class="max-w-container-max mx-auto px-8 md:px-32 mb-section-padding">
             <div
                 class="bg-mint-container p-12 md:p-20 rounded-[3rem] relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-12">
                 <div

@@ -33,13 +33,13 @@ new class extends Component {
                 </div>
             </div>
             <div class="relative">
-                <div class="aspect-square rounded-[32px] overflow-hidden shadow-2xl relative z-10">
+                <div class="aspect-square rounded-4xl overflow-hidden shadow-2xl relative z-10">
                     <img class="w-full h-full object-cover"
                         data-alt="A clean and professional digital workspace with a high-end laptop and smartphone on a white desk. The lighting is bright and airy, representing a modern light-mode interface. The color palette is composed of deep navy blues and crisp whites with subtle green accents. Minimalist and corporate aesthetic that communicates technical expertise and reliability."
                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMpIqpIrzNL_jOg6SpgcIPGevIhB7K9Tr7q-RTE1wI2woOQ1o27hvaQRfOSYXvR0ejUroGDSqaaE-sbC82MZ3ZqI9Y5mjRVgpD9uRfNvQgrDU1WC1CYrqGzv-3SmPJyNl-ohHbgW3w44rw3ZIEGi9yZCoBKnU-eavSrlheSBeKO3Om7As9QekK00WFkfywjVrgWXw36CVCmfccJFkNNd0nJPcP33g6i33G1NcH5CnWq0HHQj8ClOLDKeQjJI8pl4w3_eikSZNsJ_56">
                 </div>
                 <div
-                    class="absolute -bottom-6 -right-6 w-64 h-64 bg-secondary-container rounded-full blur-[80px] opacity-30 -z-0">
+                    class="absolute -bottom-6 -right-6 w-64 h-64 bg-secondary-container rounded-full blur-[80px] opacity-30 z-0">
                 </div>
             </div>
         </div>
@@ -75,12 +75,12 @@ new class extends Component {
                 </div>
                 <div class="md:w-1/2 grid grid-cols-2 gap-4">
                     <div
-                        class="bg-primary-container p-8 rounded-[24px] text-white flex flex-col justify-between aspect-square">
+                        class="bg-primary-container p-8 rounded-3xl text-white flex flex-col justify-between aspect-square">
                         <span class="material-symbols-outlined text-4xl">check_circle</span>
                         <p class="text-headline-md">Fácil de recordar</p>
                     </div>
                     <div
-                        class="bg-surface-container-high p-8 rounded-[24px] text-primary flex flex-col justify-between aspect-square">
+                        class="bg-surface-container-high p-8 rounded-3xl text-primary flex flex-col justify-between aspect-square">
                         <span class="material-symbols-outlined text-4xl">verified</span>
                         <p class="text-headline-md">Protege tu marca</p>
                     </div>
@@ -140,7 +140,7 @@ new class extends Component {
             <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
                 <!-- Analogía -->
                 <div
-                    class="md:col-span-1 bg-white p-8 rounded-[24px] border border-outline-variant shadow-sm flex flex-col justify-between">
+                    class="md:col-span-1 bg-white p-8 rounded-3xl border border-outline-variant shadow-sm flex flex-col justify-between">
                     <div>
                         <span class="font-label-sm text-label-sm text-outline mb-2 block uppercase tracking-widest">La
                             Analogía</span>
@@ -168,11 +168,11 @@ new class extends Component {
                     </div>
                 </div>
                 <!-- Visual Comparison -->
-                <div class="md:col-span-2 relative h-[400px] rounded-[24px] overflow-hidden group">
+                <div class="md:col-span-2 relative h-100 rounded-3xl overflow-hidden group">
                     <img class="w-full h-full object-cover"
                         data-alt="A split-screen visual representation. On the left, a minimalist 3D map icon with a shiny pushpin labeled 'empresa.com'. On the right, a sleek silver server cabinet glowing with soft blue LEDs representing data storage. The entire image is bathed in soft, professional office lighting with a clean white background. High-quality 3D render style with corporate minimalist vibes."
                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoef6ndhES-viCqq297J-1MwjcC9y1lpWVnWvDL4__RLPZ390TYL8ZBhdTReavSHvqbj4VeIFvcE8BE0pbX6hep9DvXXfKUJyHEWi8p8F6pcU3MdmHV3bfCfUQU_ke6V7fIefURIw-AFjtDki7WpnCqkYe2Jx9VzBC-BJ5mC4zXghVKoSLgjrscYw0IRFVUAymISZY1r4Relc4wGznzXa7GSz7B1ouDFpaAwWHM0-huWQBYY0lvSekifbv7O-5I7HUP1moTXFqMs91">
-                    <div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent flex items-end p-8">
+                    <div class="absolute inset-0 bg-linear-to-t from-primary/80 to-transparent flex items-end p-8">
                         <div>
                             <h4 class="text-white font-headline-md">Trabajando Juntos</h4>
                             <p class="text-white/80 font-body-md">Necesitas ambos para que tu correo profesional
@@ -282,7 +282,7 @@ new class extends Component {
                 <p class="font-body-lg text-body-lg text-white/80 mb-10">Crea tu correo profesional en menos de 5
                     minutos. Nosotros te guiamos en cada paso.</p>
                 <button
-                    class="bg-[#25D366] text-white px-10 py-4 rounded-full font-black text-xl hover:scale-105 transition-transform flex items-center gap-3 mx-auto">
+                    class="bg-secondary text-white px-10 py-4 rounded-full font-black text-xl hover:scale-105 transition-transform flex items-center gap-3 mx-auto">
                     <span class="material-symbols-outlined">rocket_launch</span>
                     Empezar Configuración
                 </button>

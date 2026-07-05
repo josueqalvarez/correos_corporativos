@@ -311,7 +311,7 @@ new class extends Component {
             </p>
             <div class="flex flex-col md:flex-row items-center justify-center gap-4">
                 <button
-                    class="w-full md:w-auto bg-[#25D366] text-white px-10 py-4 rounded-xl font-bold text-lg hover:opacity-90 shadow-lg active:scale-95 transition-all">
+                    class="w-full md:w-auto bg-secondary text-white px-10 py-4 rounded-xl font-bold text-lg hover:opacity-90 shadow-lg active:scale-95 transition-all">
                     Hablar con un Experto
                 </button>
                 <button

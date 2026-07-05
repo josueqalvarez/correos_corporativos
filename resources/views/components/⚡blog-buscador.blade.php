@@ -23,7 +23,7 @@ new class extends Component {
     <!-- Header & Statistics -->
     <x.header>
         <div
-            class="border-b border-outline-variant/20 pb-8 relative max-w-[1280px]  mx-auto px-8 md:px-32">
+            class="border-b border-outline-variant/20 pb-8 relative max-w-7xl mx-auto px-8 md:px-32">
             <h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">
                 Resultados para: <span class="text-secondary">"{{ $search_query }}"</span>
             </h1>
@@ -33,7 +33,7 @@ new class extends Component {
         </div>
     </x.header>
 
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mx-auto px-8 md:px-32 max-w-[1280px] pb-section-padding">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mx-auto px-8 md:px-32 max-w-7xl pb-section-padding">
         <!-- Main Content: Search Results -->
         <section class="lg:col-span-8 space-y-8">
 
@@ -113,8 +113,8 @@ new class extends Component {
                 </div>
             </div>
             <!-- Featured Image Card -->
-            <div class="relative h-[400px] rounded-3xl overflow-hidden group">
-                <div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent z-10"></div>
+            <div class="relative h-100 rounded-3xl overflow-hidden group">
+                <div class="absolute inset-0 bg-linear-to-t from-primary/80 to-transparent z-10"></div>
                 <div class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-700"
                     data-alt="A professional workspace in Lima, Peru, featuring a sleek laptop displaying a modern email dashboard. Large windows reveal the Miraflores skyline at dusk. The lighting is sophisticated and warm, using high-end corporate photography style with deep navies and vibrant teal accents. The atmosphere conveys trust, connectivity, and technological reliability."
                     style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCPwSLaRwVIz5zagabsACBYNjtEaxcU3Z2wZNlittwBTAN_OJ8YlbS2gJHCv4CNWnvQH92wbNAsebNwfZ1HR8a3Z5aZceb99gLlIOWSsJZBrVk7ISFwEGa4jEsBiGElUqcqGplDX12CXaH96jFM-qobITWJ6jbJf9shgtTHzAQzOrHsB6i5z7ihOgAICmfG_xXjifJbLhpYkevK77__yu6ZFU0bdxPTTmGQyg1gzItlhCB_uvLxgEvQmQ')">

@@ -62,7 +62,7 @@ new class extends Component {
             </div>
             <div class="relative">
                 <div
-                    class="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] aspect-square bg-gradient-to-tr from-secondary/10 to-transparent rounded-full blur-3xl">
+                    class="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] aspect-square bg-linear-to-tr from-secondary/10 to-transparent rounded-full blur-3xl">
                 </div>
                 <img alt="MailCorp Peru Professional Email Setup Display" class="w-full h-auto rounded-3xl shadow-2xl"
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZacFdzR4uKSmYBlYeQyaY2_zMz0aBGdda2TMVOmSZkJkHvVf0OwG4oP-YHmf5_6AK0jXq1MMq-mamTexIKP4SKP1fKVOzvOti-nVPprLeEExAHUrK731enzy2IB409vfwZDRpEwnZSZfzL5j-1_Vi31GBsWhrLnVTSZI_mXLVQOcOXsKGtAhTAaysC31q1GY8Ivt5A19t_eChBM_c85s-kSBwFAn3X5120iu7QUaoXaIuwxlK4CpSLAeZYOiCUTICH9mF7oRjF-4z" />
@@ -259,7 +259,7 @@ new class extends Component {
             <div class="grid lg:grid-cols-3 gap-gutter items-start">
                 <!-- Main Pricing Card -->
                 <div
-                    class="lg:col-span-2 bg-white rounded-[32px] p-8 md:p-12 shadow-2xl border border-outline-variant relative overflow-hidden">
+                    class="lg:col-span-2 bg-white rounded-4xl p-8 md:p-12 shadow-2xl border border-outline-variant relative overflow-hidden">
                     <div
                         class="absolute top-0 right-0 bg-secondary text-on-secondary px-6 py-2 rounded-bl-3xl font-bold font-label-mono">
                         MÁS POPULAR</div>
@@ -301,7 +301,7 @@ new class extends Component {
                         </div>
                     </div>
                     <button
-                        class="w-full bg-secondary text-on-secondary py-5 rounded-2xl font-bold text-xl flex items-center justify-center gap-3 shadow-xl shadow-secondary/20 hover:translate-y-[-2px] transition-all">
+                        class="w-full bg-secondary text-on-secondary py-5 rounded-2xl font-bold text-xl flex items-center justify-center gap-3 shadow-xl shadow-secondary/20 hover:-translate-y-0.5 transition-all">
                         Agendar mi llamada de configuración
                         <span class="material-symbols-outlined">arrow_forward</span>
                     </button>

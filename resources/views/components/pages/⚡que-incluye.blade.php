@@ -11,7 +11,7 @@ new class extends Component {
 <div>
 
     <!-- Hero Section / Animated Background -->
-    <section class="relative h-[400px] flex items-center justify-center overflow-hidden">
+    <section class="relative h-100 flex items-center justify-center overflow-hidden">
 
         <div class="relative z-10 text-center px-margin-mobile">
             <h1 class="font-headline-xl text-headline-xl text-primary mb-4">Claridad Absoluta</h1>
@@ -89,12 +89,12 @@ new class extends Component {
                 </p>
             </div>
             <!-- Bento-style visual placeholder -->
-            <div class="relative overflow-hidden rounded-xl h-full min-h-[200px]">
+            <div class="relative overflow-hidden rounded-xl h-full min-h-50">
                 <div class="bg-cover bg-center w-full h-full"
                     data-alt="A clean, professional workspace featuring a sleek laptop showing an organized email inbox and a smartphone with email notifications. The lighting is bright and natural with a minimalist office aesthetic, dominated by soft blues and whites to match the EmailCorp corporate identity."
                     style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD0RaHcAMEsFJ63B_-C0V8zlWNdN2Dhxy1KmzPLe706Z1Nx7DZnUTFVVsSSmi6BL576xIGFJ2S2E0ErveIucmndTRTmZ5DEW1x9iODn-VxAvuzTs_bVUCDe0kFTprYXDI2d66bLaNw5Z7Ma2lwITG5hkQ_OMQ1Mr9DMxOy38pMETmpy-oeLaUltzU3Yc8XTgOe-70Y3ZulBauV_4X_b4f3l3P34BtCN7CnU7R8oBAHYXB-pDOwwEkHaDhQ3yH6882GjErxfPaODXyji')">
                 </div>
-                <div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent flex items-end p-stack-md">
+                <div class="absolute inset-0 bg-linear-to-t from-primary/60 to-transparent flex items-end p-stack-md">
                     <span class="text-white font-headline-md">Profesionalismo garantizado.</span>
                 </div>
             </div>
@@ -206,7 +206,7 @@ new class extends Component {
                 técnicos para siempre.</p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <button
-                    class="bg-[#25D366] text-white font-bold px-8 py-4 rounded-full text-lg shadow-lg hover:scale-105 transition-transform">
+                    class="bg-secondary text-white font-bold px-8 py-4 rounded-full text-lg shadow-lg hover:scale-105 transition-transform">
                     Iniciar Configuración
                 </button>
                 <button
