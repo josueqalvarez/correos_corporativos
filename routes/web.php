@@ -24,4 +24,9 @@ Route::livewire('/faq', 'pages.⚡faq')->name('faq');
 # Contáctanos
 Route::livewire('/contacto', 'pages.⚡contactanos')->name('contacto');
 
+# Inicio de sesión
+Route::livewire('/login', 'pages.users.auth.⚡login')->name('login');
+Route::livewire('/crear-cuenta', 'pages.users.auth.⚡create')->name('crear-cuenta');
+Route::livewire('/profile', 'pages.users.⚡profile')->name('profile');
+
 require __DIR__.'/settings.php';

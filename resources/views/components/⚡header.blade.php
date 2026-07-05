@@ -14,11 +14,13 @@ h-18">
         <div class="font-headline-md text-headline-md font-bold text-on-primary dark:text-on-primary-container">
             EmailCorp
         </div>
+
+        {{-- Navigation --}}
         <livewire:nav />
 
         <a class="bg-secondary text-on-secondary px-6 py-2 rounded-lg font-bold hover:scale-95 duration-150 transition-all font-label-sm text-label-sm"
-            href="https://wa.me/yourlink">
-            WhatsApp
+            href="{{ route('login') }}">
+            Iniciar sesion
         </a>
     </div>
 
