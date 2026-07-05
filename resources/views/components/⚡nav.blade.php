@@ -7,10 +7,11 @@ new class extends Component {
 
     public array $routes = [
         '/' => 'Inicio',
+        'blog' => 'Blog',
         'que-incluye' => '¿Qué incluye?',
         'dominio-y-hosting-email' => 'Dominio y Hosting Email',
         'contacto' => 'Contáctanos',
-        'opiniones' => 'Opiniones',
+        #'opiniones' => 'Opiniones',
         'faq' => 'Preguntas frecuentes',
     ];
 
@@ -24,8 +25,6 @@ new class extends Component {
 
 {{-- Navigation --}}
 <nav class="hidden md:flex gap-8">
-
-
     @foreach ($routes as $route => $label)
         <a class="{{ request()->is($route) ? $currentRoute : $defaultRoute }}" href="{{ $route }}" wire:navigate>
             {{ $label }}

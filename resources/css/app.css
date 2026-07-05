@@ -63,6 +63,10 @@
     --radius-xl: 0.75rem;
     --radius-full: 9999px;
 
+    --color-success-teal: #00d1b2;
+    --color-mint-container: #54f8d7;
+    --color-neutral-800: #181c1e;
+
     --color-zinc-50: #fafafa;
     --color-zinc-100: #f5f5f5;
     --color-zinc-200: #e5e5e5;
@@ -121,6 +125,8 @@
     --color-surface: #f7fafc;
     --color-surface-container-low: #f1f4f6;
     --color-secondary: #25D366;
+    --color-navy-container: #0d1c32;
+    --color-on-navy-container: #f7fafc;
 
     --color-accent: var(--color-neutral-800);
     --color-accent-content: var(--color-neutral-800);

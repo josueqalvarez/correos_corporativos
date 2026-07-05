@@ -34,8 +34,9 @@ new class extends Component {
                         placeholder="Buscar artículos, guías o tutoriales..." type="text" />
                 </div>
                 <button
-                    class="w-full sm:w-auto whitespace-nowrap bg-secondary text-on-secondary px-8 py-4 rounded-2xl font-bold hover:bg-secondary/90 transition-colors shadow-lg active:scale-95">
-                    Solicitar configuración
+                    class="w-full sm:w-auto whitespace-nowrap bg-secondary text-on-secondary px-8 py-4 rounded-2xl font-bold hover:bg-secondary/90 transition-colors shadow-lg active:scale-95"
+                    wire:navigate href="/blog-buscador">
+                    Buscar
                 </button>
             </div>
         </div>
@@ -129,12 +130,11 @@ new class extends Component {
                                 <span class="text-secondary font-bold text-sm">DNS &amp; Configuración</span>
                                 <span class="text-on-surface-variant/60 text-sm">• 5 min de lectura</span>
                             </div>
-                            <h3 class="text-xl font-bold mb-3 group-hover:text-secondary transition-colors">Migración de
-                                correos sin pérdida de datos: Paso a paso</h3>
+                            <h3 class="text-xl font-bold mb-3 group-hover:text-secondary transition-colors">Guía completa para configurar Zoho Mail con tu dominio propio</h3>
                             <p class="text-on-surface-variant mb-4">Descubre cómo mover toda tu infraestructura de
                                 correo entre proveedores sin arriesgar la integridad de tu información histórica.</p>
-                            <a class="text-primary font-bold text-sm flex items-center gap-1" href="#">Continuar
-                                leyendo <span class="material-symbols-outlined text-sm">open_in_new</span></a>
+                            <button class="text-primary font-bold text-sm flex items-center gap-1" wire:navigate href="/blog-articulo">Continuar
+                                leyendo <span class="material-symbols-outlined text-sm">open_in_new</span></button>
                         </div>
                     </article>
                     <article class="group grid md:grid-cols-3 gap-8">

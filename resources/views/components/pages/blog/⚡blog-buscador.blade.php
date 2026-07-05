@@ -9,15 +9,19 @@ new class extends Component {
 
 <x-layouts.index>
     <!-- Header & Statistics -->
-    <header class="mb-12 border-b border-outline-variant/20 pb-8">
-        <h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">
-            Resultados para: <span class="text-secondary">"correo corporativo peru"</span>
-        </h1>
-        <p class="font-label-mono text-label-mono text-on-surface-variant">
-            SE ENCONTRARON 12 ARTÍCULOS
-        </p>
-    </header>
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+    <x.header>
+        <div
+            class="mb-12 border-b border-outline-variant/20 pb-8 relative max-w-[1600px] py-section-padding mx-auto px-8 md:px-32">
+            <h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">
+                Resultados para: <span class="text-secondary">"correo corporativo peru"</span>
+            </h1>
+            <p class="font-label-mono text-label-mono text-on-surface-variant">
+                SE ENCONTRARON 12 ARTÍCULOS
+            </p>
+        </div>
+    </x.header>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mx-auto px-8 md:px-32 max-w-[1600px] py-section-padding">
         <!-- Main Content: Search Results -->
         <section class="lg:col-span-8 space-y-8">
             <!-- Result Item 1 -->

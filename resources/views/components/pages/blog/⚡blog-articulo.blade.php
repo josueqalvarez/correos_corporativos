@@ -9,38 +9,42 @@ new class extends Component {
 
 <x-layouts.index>
     <!-- Breadcrumbs -->
-    <nav
-        class="flex items-center gap-2 mb-8 font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider">
-        <a class="hover:text-secondary transition-colors" href="#">Blog</a>
-        <span class="material-symbols-outlined text-[14px]">chevron_right</span>
-        <span class="text-on-surface">Zoho Mail</span>
-    </nav>
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-stack-lg items-start">
+    <div
+        class="grid grid-cols-1 lg:grid-cols-12 gap-stack-lg items-start max-w-[1600px] py-section-padding mx-auto px-8 md:px-32 pt-">
         <!-- Article Body (Center/Left) -->
         <article class="lg:col-span-8">
             <!-- Header -->
-            <header class="mb-12">
-                <h1
-                    class="font-headline-lg text-headline-lg md:text-display-xl-mobile lg:text-display-xl mb-6 text-primary leading-tight">
-                    Guía completa para configurar Zoho Mail con tu dominio propio
-                </h1>
-                <div class="flex flex-wrap items-center gap-6 text-on-surface-variant font-label-mono text-label-mono">
-                    <div class="flex items-center gap-2">
-                        <div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center">
-                            <span class="material-symbols-outlined text-on-secondary-container">person</span>
+            <x.header>
+                <div class="mb-12">
+                    <div
+                        class="flex items-center gap-2 mb-8 font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider max-w-[1600px]  mx-auto px-8 ">
+                        <a class="hover:text-secondary transition-colors" href="#">Blog</a>
+                        <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+                        <span class="text-on-surface">Zoho Mail</span>
+                    </div>
+                    <h1
+                        class="font-headline-lg text-headline-xl md:text-display-xl-mobile lg:text-display-xl mb-6 text-primary leading-tight ">
+                        Guía completa para configurar Zoho Mail con tu dominio propio
+                    </h1>
+                    <div
+                        class="flex flex-wrap items-center gap-6 text-on-surface-variant font-label-mono text-label-mono">
+                        <div class="flex items-center gap-2">
+                            <div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center">
+                                <span class="material-symbols-outlined text-on-secondary-container">person</span>
+                            </div>
+                            <span>Por Staff MailCorp</span>
                         </div>
-                        <span>Por Staff MailCorp</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <span class="material-symbols-outlined">calendar_today</span>
-                        <span>24 Mayo, 2024</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <span class="material-symbols-outlined">schedule</span>
-                        <span>12 min de lectura</span>
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined">calendar_today</span>
+                            <span>24 Mayo, 2024</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined">schedule</span>
+                            <span>12 min de lectura</span>
+                        </div>
                     </div>
                 </div>
-            </header>
+            </x.header>
             <!-- Featured Image -->
             <div class="rounded-3xl overflow-hidden mb-12 shadow-2xl">
                 <img class="w-full h-auto aspect-video object-cover"
@@ -92,11 +96,12 @@ new class extends Component {
                     <li class="flex gap-3">
                         <span class="material-symbols-outlined text-success-teal"
                             style="font-variation-settings: 'FILL' 1;">check_circle</span>
-                        <span>Es un estándar exigido por Gmail, Outlook y Yahoo.</span>
+                        <span>Es un estándar exigido por Gmail y Outlook</span>
                     </li>
                 </ul>
                 <!-- Pro Tip Box -->
-                <div class="bg-mint-container/20 border-l-4 border-success-teal p-8 rounded-r-3xl my-10">
+                <div
+                    class="bg-mint-container/20 border-l-4 border-success-teal p-8 rounded-r-3xl my-10 bg-mint-container">
                     <div class="flex items-start gap-4">
                         <div class="p-2 bg-success-teal text-on-primary rounded-xl">
                             <span class="material-symbols-outlined">lightbulb</span>
@@ -260,7 +265,7 @@ new class extends Component {
     </div>
     <!-- Sticky Footer CTA Banner -->
     <section
-        class="mt-section-padding bg-navy-container text-on-tertiary-fixed p-12 rounded-[40px] flex flex-col md:flex-row items-center justify-between gap-8">
+        class="mt-section-padding bg-navy-container text-on-tertiary-fixed p-12 rounded-[40px] flex flex-col md:flex-row items-center justify-between gap-8 max-w-[1400px] py-section-padding mx-auto px-8 md:px-32 mb-section-padding">
         <div class="text-center md:text-left">
             <h2 class="font-headline-lg text-headline-lg mb-2 text-on-primary">¿Prefieres que nosotros configuremos
                 todo por ti?</h2>

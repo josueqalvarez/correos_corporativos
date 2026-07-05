@@ -21,4 +21,6 @@ h-18">
             WhatsApp
         </a>
     </div>
+
+    {{ $slot }}
 </header>
