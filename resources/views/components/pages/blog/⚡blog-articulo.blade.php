@@ -217,6 +217,75 @@ new class extends Component {
                         </details>
                     </div>
                 </section>
+
+                <section class="mt-16 rounded-3xl border border-outline-variant/20 bg-surface-container-lowest p-8 md:p-10 shadow-sm">
+                    <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+                        <div>
+                            <h2 class="font-headline-lg text-headline-lg text-primary">Responde al blog</h2>
+                            <p class="mt-2 text-on-surface-variant">Comparte tu experiencia o deja un comentario útil para otros lectores.</p>
+                        </div>
+                        <span class="inline-flex w-fit items-center rounded-full bg-secondary-container px-3 py-1 font-label-mono text-label-mono text-on-secondary-container">
+                            Conversación activa
+                        </span>
+                    </div>
+
+                    <div class="mt-8 space-y-6">
+                        <div class="rounded-2xl border border-outline-variant/20 bg-surface-container-low p-6">
+                            <div class="flex items-start gap-4">
+                                <div class="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-lg font-bold text-on-primary">
+                                    KS
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex flex-wrap items-center gap-2">
+                                        <h3 class="font-bold text-primary">Karla Sevina</h3>
+                                        <span class="rounded-full bg-secondary-container px-2.5 py-1 text-xs font-label-mono text-on-secondary-container">
+                                            Lectora experta
+                                        </span>
+                                    </div>
+                                    <p class="mt-2 text-on-surface-variant">
+                                        Gracias por esta guía, me ayudó mucho a entender cómo organizar correctamente los registros SPF y DKIM en un entorno empresarial.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="mt-4 rounded-2xl border border-outline-variant/20 bg-surface-container-lowest p-4">
+                                <p class="text-sm font-semibold text-primary">Respuesta a Karla Sevina</p>
+                                <p class="mt-2 text-sm text-on-surface-variant">
+                                    Exactamente, mantenerlo ordenado desde el inicio evita muchos problemas de entregabilidad y hace más sencilla la migración futura.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="rounded-2xl border border-outline-variant/20 bg-surface-container-low p-6">
+                            <label class="mb-2 block font-bold text-primary" for="blog-response">Escribe una respuesta al blog</label>
+                            <textarea
+                                class="min-h-28 w-full rounded-2xl border border-outline-variant/30 bg-surface-container-lowest px-4 py-3 text-body-base outline-none ring-0 focus:border-secondary"
+                                id="blog-response"
+                                placeholder="Comparte tu experiencia, duda o consejo para la comunidad..."
+                            ></textarea>
+                            <div class="mt-4 flex flex-col gap-3 sm:flex-row">
+                                <button class="rounded-full bg-primary px-6 py-3 font-bold text-on-primary transition-transform hover:scale-[1.01]">
+                                    Publicar respuesta
+                                </button>
+                                <button class="rounded-full border border-outline-variant px-6 py-3 font-bold text-primary transition-colors hover:bg-surface-container-highest">
+                                    Responder a Karla Sevina
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="rounded-2xl border border-outline-variant/20 bg-surface-container-low p-6">
+                            <label class="mb-2 block font-bold text-primary" for="karla-reply">Escribe un comentario</label>
+                            <textarea
+                                class="min-h-24 w-full rounded-2xl border border-outline-variant/30 bg-surface-container-lowest px-4 py-3 text-body-base outline-none ring-0 focus:border-secondary"
+                                id="karla-reply"
+                                placeholder="Añade tu respuesta .."
+                            ></textarea>
+                            <button class="mt-4 rounded-full bg-secondary px-6 py-3 font-bold text-on-secondary transition-transform hover:scale-[1.01]">
+                                Enviar respuesta
+                            </button>
+                        </div>
+                    </div>
+                </section>
             </div>
         </article>
         <!-- Sidebar -->
