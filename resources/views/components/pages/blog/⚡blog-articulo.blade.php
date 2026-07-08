@@ -19,16 +19,13 @@ new class extends Component {
         ],
     ];
 
-    public $item_searched;
+    public $blog_searched;
     
     public string $slug;
 
     public function mount(string $slug)
     {
-        $this->slug = urldecode($slug);
-
-        $this->item_searched = Blog::where('slug', $this->slug)->firstOrFail();
-
+        $this->blog_searched = Blog::where('slug', $this->slug)->firstOrFail();
     }
 };
 ?>
@@ -50,7 +47,7 @@ new class extends Component {
                     </div>
                     <h1
                         class="font-headline-lg text-headline-xl md:text-display-xl-mobile lg:text-display-xl mb-6 text-primary leading-tight ">
-                        {{ $item_searched['title'] }}
+                        {{ $blog_searched['title'] }}
                     </h1>
                     <div
                         class="flex flex-wrap items-center gap-6 text-on-surface-variant font-label-mono text-label-mono">
@@ -62,11 +59,11 @@ new class extends Component {
                         </div> --}}
                         <div class="flex items-center gap-2">
                             <span class="material-symbols-outlined">calendar_today</span>
-                            <span>{{ $item_searched['date'] }}</span>
+                            <span>{{ $blog_searched['date'] }}</span>
                         </div>
                         <div class="flex items-center gap-2">
                             <span class="material-symbols-outlined">schedule</span>
-                            <span>{{ $item_searched['reading_time'] }} min de lectura</span>
+                            <span>{{ $blog_searched['reading_time'] }} min de lectura</span>
                         </div>
                     </div>
                 </div>
@@ -75,12 +72,12 @@ new class extends Component {
             <div class="rounded-3xl overflow-hidden mb-12 shadow-2xl">
                 <img class="w-full h-auto aspect-video object-cover"
                     data-alt="A professional high-fidelity digital rendering of a sleek laptop displaying a clean Zoho Mail interface with a customized business domain email. The scene is set in a modern, brightly lit office environment with soft glassmorphism accents and a corporate navy and teal color palette. Soft ambient light illuminates the silver laptop while technical network diagrams float subtly in the blurred background, conveying a sense of advanced cloud infrastructure and reliability."
-                    src=" {{  asset('storage/' . $item_searched['image']) }} " />
+                    src=" {{  asset('storage/' . $blog_searched['image']) }} " />
             </div>
             <!-- Content Intro -->
             <div class="prose prose-lg max-w-none text-on-surface-variant leading-relaxed">
                 <p class="text-subheading font-subheading mb-8">
-                    {{ $item_searched['description'] }}
+                    {{ $blog_searched['description'] }}
                 </p>
                 <!-- Table of Contents (Mobile Only) -->
                 <div class="lg:hidden bg-surface-container p-6 rounded-2xl mb-8">
@@ -101,7 +98,7 @@ new class extends Component {
                 <h2 class="font-headline-lg text-headline-lg text-primary mt-12 mb-6" id="spf">¿Qué es un registro
                     SPF y por qué lo necesitas?</h2>
                 <p class="mb-6">
-                    {{  $item_searched['content'] }}
+                    {{  $blog_searched['content'] }}
                 </p>
                 <ul class="space-y-4 mb-8">
                     <li class="flex gap-3">
@@ -213,74 +210,8 @@ new class extends Component {
                     </div>
                 </section>
 
-                <section class="mt-16 rounded-3xl border border-outline-variant/20 bg-surface-container-lowest p-8 md:p-10 shadow-sm">
-                    <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-                        <div>
-                            <h2 class="font-headline-lg text-headline-lg text-primary">Responde al blog</h2>
-                            <p class="mt-2 text-on-surface-variant">Comparte tu experiencia o deja un comentario útil para otros lectores.</p>
-                        </div>
-                        <span class="inline-flex w-fit items-center rounded-full bg-secondary-container px-3 py-1 font-label-mono text-label-mono text-on-secondary-container">
-                            Conversación activa
-                        </span>
-                    </div>
-
-                    <div class="mt-8 space-y-6">
-                        <div class="rounded-2xl border border-outline-variant/20 bg-surface-container-low p-6">
-                            <div class="flex items-start gap-4">
-                                <div class="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-lg font-bold text-on-primary">
-                                    KS
-                                </div>
-                                <div class="flex-1">
-                                    <div class="flex flex-wrap items-center gap-2">
-                                        <h3 class="font-bold text-primary">Karla Sevina</h3>
-                                        <span class="rounded-full bg-secondary-container px-2.5 py-1 text-xs font-label-mono text-on-secondary-container">
-                                            Lectora experta
-                                        </span>
-                                    </div>
-                                    <p class="mt-2 text-on-surface-variant">
-                                        Gracias por esta guía, me ayudó mucho a entender cómo organizar correctamente los registros SPF y DKIM en un entorno empresarial.
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="mt-4 rounded-2xl border border-outline-variant/20 bg-surface-container-lowest p-4">
-                                <p class="text-sm font-semibold text-primary">Respuesta a Karla Sevina</p>
-                                <p class="mt-2 text-sm text-on-surface-variant">
-                                    Exactamente, mantenerlo ordenado desde el inicio evita muchos problemas de entregabilidad y hace más sencilla la migración futura.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="rounded-2xl border border-outline-variant/20 bg-surface-container-low p-6">
-                            <label class="mb-2 block font-bold text-primary" for="blog-response">Escribe una respuesta al blog</label>
-                            <textarea
-                                class="min-h-28 w-full rounded-2xl border border-outline-variant/30 bg-surface-container-lowest px-4 py-3 text-body-base outline-none ring-0 focus:border-secondary"
-                                id="blog-response"
-                                placeholder="Comparte tu experiencia, duda o consejo para la comunidad..."
-                            ></textarea>
-                            <div class="mt-4 flex flex-col gap-3 sm:flex-row">
-                                <button class="rounded-full bg-primary px-6 py-3 font-bold text-on-primary transition-transform hover:scale-[1.01]">
-                                    Publicar respuesta
-                                </button>
-                                <button class="rounded-full border border-outline-variant px-6 py-3 font-bold text-primary transition-colors hover:bg-surface-container-highest">
-                                    Responder a Karla Sevina
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="rounded-2xl border border-outline-variant/20 bg-surface-container-low p-6">
-                            <label class="mb-2 block font-bold text-primary" for="karla-reply">Escribe un comentario</label>
-                            <textarea
-                                class="min-h-24 w-full rounded-2xl border border-outline-variant/30 bg-surface-container-lowest px-4 py-3 text-body-base outline-none ring-0 focus:border-secondary"
-                                id="karla-reply"
-                                placeholder="Añade tu respuesta .."
-                            ></textarea>
-                            <button class="mt-4 rounded-full bg-secondary px-6 py-3 font-bold text-on-secondary transition-transform hover:scale-[1.01]">
-                                Enviar respuesta
-                            </button>
-                        </div>
-                    </div>
-                </section>
+                <!-- Comments Section -->
+                <livewire:pages.blog.comment-section :blog="$blog_searched" />
             </div>
         </article>
         <!-- Sidebar -->
@@ -324,13 +255,12 @@ new class extends Component {
             <!-- Newsletter / CTA Card -->
             <div class="bg-primary text-on-primary p-8 rounded-3xl relative overflow-hidden shadow-2xl">
                 <div class="relative z-10">
-                    <h4 class="font-headline-lg text-headline-lg mb-4">¿Necesitas ayuda técnica?</h4>
-                    <p class="opacity-80 mb-6 text-body-base">Nuestros ingenieros pueden realizar toda la configuración
-                        de registros MX, SPF y DKIM por ti.</p>
+                    <h4 class="font-headline-md text-headline-md mb-4">¿Prefieres que nosotros configuremos todo por ti?</h4>
+                    <p class="opacity-80 mb-6 text-body-base">Ahorra tiempo y evita errores técnicos. Servicio de configuración express disponible.</p>
                     <button
                         class="w-full bg-secondary-fixed text-on-secondary-fixed py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-white transition-colors active:scale-95 duration-200">
-                        <span class="material-symbols-outlined">chat</span>
-                        Hablar con Soporte
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">phone_iphone</span>
+                        WhatsApp Corporativo
                     </button>
                 </div>
                 <!-- Decorative background pattern -->
@@ -339,19 +269,5 @@ new class extends Component {
             </div>
         </aside>
     </div>
-    <!-- Sticky Footer CTA Banner -->
-    <section
-        class="mt-section-padding bg-navy-container text-on-tertiary-fixed p-12 rounded-[40px] flex flex-col md:flex-row items-center justify-between gap-8 max-w-350 py-section-padding mx-auto px-8 md:px-32 mb-section-padding">
-        <div class="text-center md:text-left">
-            <h2 class="font-headline-lg text-headline-lg mb-2 text-on-primary">¿Prefieres que nosotros configuremos
-                todo por ti?</h2>
-            <p class="text-on-navy-container text-subheading">Ahorra tiempo y evita errores técnicos. Servicio de
-                configuración express disponible.</p>
-        </div>
-        <a class="bg-success-teal text-primary font-bold px-8 py-4 rounded-full flex items-center gap-3 hover:scale-105 transition-transform shadow-lg whitespace-nowrap"
-            href="https://wa.me/mailcorpperu">
-            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">phone_iphone</span>
-            WhatsApp Corporativo
-        </a>
-    </section>
+
 </div>
