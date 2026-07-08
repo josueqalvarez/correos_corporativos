@@ -7,7 +7,7 @@ Route::livewire('/', 'pages.⚡home')->name('home');
 
 # Blog
 Route::livewire('/blog', 'pages.blog.blog-home')->name('blog');
-Route::livewire('/blog/{title}', 'pages.blog.⚡blog-articulo')->name('blog-articulo');
+Route::livewire('/blog/{slug}', 'pages.blog.⚡blog-articulo')->name('blog-articulo');
 
 # Que incluye
 Route::livewire('/que-incluye', 'pages.⚡que-incluye')->name('que-incluye');

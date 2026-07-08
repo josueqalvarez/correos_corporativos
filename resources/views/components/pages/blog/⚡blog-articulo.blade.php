@@ -2,9 +2,11 @@
 
 use Livewire\Component;
 use Livewire\Attributes\Layout;
+use App\Models\Blog;
 
 new class extends Component {
     #[Layout('components.layouts.index')]
+    
     public array $bd = [
         [
             'title' => 'Guía completa para configurar Zoho Mail con tu dominio propio',
@@ -17,20 +19,16 @@ new class extends Component {
         ],
     ];
 
-    public string $title;
+    public $item_searched;
+    
+    public string $slug;
 
-    public array $item_searched = [];
-
-    public function mount(string $title)
+    public function mount(string $slug)
     {
-        $this->title = urldecode($title);
+        $this->slug = urldecode($slug);
 
-        foreach ($this->bd as $item) {
-            if ($item['title'] === $this->title) {
-                $this->item_searched = $item;
-                break;
-            }
-        }
+        $this->item_searched = Blog::where('slug', $this->slug)->firstOrFail();
+
     }
 };
 ?>
@@ -77,7 +75,7 @@ new class extends Component {
             <div class="rounded-3xl overflow-hidden mb-12 shadow-2xl">
                 <img class="w-full h-auto aspect-video object-cover"
                     data-alt="A professional high-fidelity digital rendering of a sleek laptop displaying a clean Zoho Mail interface with a customized business domain email. The scene is set in a modern, brightly lit office environment with soft glassmorphism accents and a corporate navy and teal color palette. Soft ambient light illuminates the silver laptop while technical network diagrams float subtly in the blurred background, conveying a sense of advanced cloud infrastructure and reliability."
-                    src="{{ $item_searched['img'] }}" />
+                    src=" {{  asset('storage/' . $item_searched['image']) }} " />
             </div>
             <!-- Content Intro -->
             <div class="prose prose-lg max-w-none text-on-surface-variant leading-relaxed">
@@ -103,10 +101,7 @@ new class extends Component {
                 <h2 class="font-headline-lg text-headline-lg text-primary mt-12 mb-6" id="spf">¿Qué es un registro
                     SPF y por qué lo necesitas?</h2>
                 <p class="mb-6">
-                    El Sender Policy Framework (SPF) es un método de autenticación de correo electrónico que especifica
-                    los servidores de correo autorizados para enviar correos electrónicos en nombre de tu dominio. Sin
-                    un SPF correctamente configurado, tus correos tienen una alta probabilidad de terminar en la carpeta
-                    de SPAM de tus clientes.
+                    {{  $item_searched['content'] }}
                 </p>
                 <ul class="space-y-4 mb-8">
                     <li class="flex gap-3">
@@ -289,21 +284,7 @@ new class extends Component {
             </div>
         </article>
         <!-- Sidebar -->
-        <aside class="lg:col-span-4 sticky top-28 space-y-8">
-            <!-- Content Index -->
-            <div class="hidden lg:block bg-surface-container-low p-8 rounded-3xl">
-                <h4 class="font-bold text-primary mb-6 flex items-center gap-2">
-                    <span class="material-symbols-outlined">bookmark</span> En este artículo
-                </h4>
-                <nav class="flex flex-col gap-4">
-                    <a class="text-body-base text-on-surface-variant hover:text-secondary transition-colors pl-4 border-l-2 border-transparent hover:border-secondary"
-                        href="#spf">¿Qué es un registro SPF?</a>
-                    <a class="text-body-base text-on-surface-variant hover:text-secondary transition-colors pl-4 border-l-2 border-transparent hover:border-secondary"
-                        href="#planes">Comparativa de Planes</a>
-                    <a class="text-body-base text-on-surface-variant hover:text-secondary transition-colors pl-4 border-l-2 border-transparent hover:border-secondary"
-                        href="#faq">Preguntas Frecuentes</a>
-                </nav>
-            </div>
+        <aside class="lg:col-span-4 sticky top-23 space-y-8">
             <!-- Related Posts -->
             <div class="bg-surface-container-lowest p-8 rounded-3xl border border-outline-variant/20">
                 <h4 class="font-bold text-primary mb-6">Artículos relacionados</h4>
