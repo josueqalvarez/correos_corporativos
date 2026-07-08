@@ -2,9 +2,37 @@
 
 use Livewire\Component;
 use Livewire\Attributes\Layout;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 new class extends Component {
     #[Layout('layouts.index')]
+    public string $email = '';
+    public string $password = '';
+
+    public function login()
+    {
+
+        # Auth::attempt(['email' => $this->email, 'password' => $this->password]);
+
+        $user = User::where('email', $this->email)->first();
+
+        if (!$user) {
+            $this->addError('email', 'El correo no existe.');
+            return;
+        }
+
+        if (!Hash::check($this->password, $user->password)) {
+            $this->addError('password', 'La contraseña es incorrecta.');
+            return;
+        }
+
+        Auth::login($user);
+        session()->regenerate();
+
+        return redirect()->route('profile');
+    }
 };
 ?>
 
@@ -24,7 +52,8 @@ new class extends Component {
             <p class="font-body-base text-body-base text-on-surface-variant">Ingresa a tu panel de configuración</p>
         </div>
         <!-- Form -->
-        <form action="#" class="space-y-stack-md flex flex-col items-center" method="POST" onsubmit="event.preventDefault()">
+        <form action="#" class="space-y-stack-md flex flex-col items-center" method="POST"
+            wire:submit.prevent="login">
             <!-- Email Field -->
             <div class="space-y-1">
                 <label
@@ -36,7 +65,11 @@ new class extends Component {
                         data-icon="alternate_email">alternate_email</span>
                     <input
                         class="w-full pl-12 pr-4 py-4 rounded-xl border-outline-variant bg-surface-container-low text-body-base focus:bg-white transition-all duration-200 "
-                        id="email" placeholder="nombre@mailcorp.pe" required="" type="email" />
+                        id="email" placeholder="nombre@mailcorp.pe" required="" type="email"
+                        wire:model="email" />
+                    @error('email')
+                        <span class="text-sm text-error">{{ $message }}</span>
+                    @enderror
                 </div>
             </div>
             <!-- Password Field -->
@@ -50,12 +83,15 @@ new class extends Component {
                         data-icon="lock">lock</span>
                     <input
                         class="w-full pl-12 pr-12 py-4 rounded-xl border-outline-variant bg-surface-container-low text-body-base focus:bg-white transition-all duration-200"
-                        id="password" placeholder="••••••••" required="" type="password" />
+                        id="password" placeholder="••••••••" required="" type="password" wire:model="password" />
                     <button
                         class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary transition-colors"
                         type="button">
                         <span class="material-symbols-outlined" data-icon="visibility">visibility</span>
                     </button>
+                    @error('password')
+                        <span class="text-sm text-error">{{ $message }}</span>
+                    @enderror
                 </div>
             </div>
             <!-- Helper Actions -->
@@ -81,9 +117,7 @@ new class extends Component {
             <!-- Action Button -->
             <button
                 class="w-full sm:w-8/12 py-3 bg-navy-container text-white rounded-full font-bold text-subheading hover:scale-[1.02] active:scale-95 transition-all duration-200 shadow-lg mt-stack-md flex items-center justify-center gap-3"
-                type="submit"
-                href=" {{ route('profile') }} "
-                wire:navigate>
+                type="submit" wire:click.prevent="login">
                 Iniciar sesión
                 <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
             </button>
@@ -92,12 +126,9 @@ new class extends Component {
         <div class="mt-stack-lg pt-stack-md border-t border-outline-variant/30 text-center">
             <p class="text-body-base text-on-surface-variant">
                 ¿No tienes cuenta?
-                <a 
-                class="font-bold text-primary hover:underline underline-offset-4" 
-                href=" {{ route('crear-cuenta') }} "
-                wire:navigate
-                >
-                Regístrate</a>
+                <a class="font-bold text-primary hover:underline underline-offset-4"
+                    href=" {{ route('crear-cuenta') }} " wire:navigate>
+                    Regístrate</a>
             </p>
         </div>
     </div>

@@ -5,6 +5,34 @@ use Livewire\Attributes\Layout;
 
 new class extends Component {
     #[Layout('layouts.index')]
+
+    public string $fullname = '';
+    public string $email = '';
+    public string $password = '';
+    public string $password_confirmation = '';
+
+    public function create_user()
+    {
+        // Validate the input fields
+        $this->validate([
+            'fullname' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:3|confirmed',
+            'password_confirmation' => 'required',
+        ]);
+
+        // Create a new user
+        $user = \App\Models\User::create([
+            'name' => $this->fullname,
+            'email' => $this->email,
+            'password' => bcrypt($this->password),
+        ]);
+
+        auth()->login($user);
+        session()->regenerate();
+
+        return redirect()->route('home')->with('success', 'Cuenta creada exitosamente. ¡Bienvenido!');
+    }
 };
 ?>
 
@@ -22,7 +50,9 @@ new class extends Component {
                     <p class="font-subheading text-subheading text-on-surface-variant">Comienza a profesionalizar tu
                         marca</p>
                 </div>
-                <form class="space-y-stack-md" onsubmit="return false;">
+
+
+                <form class="space-y-stack-md" wire:submit.prevent="create_user">
                     <!-- Full Name -->
                     <div class="space-y-2">
                         <label class="font-label-mono text-label-mono text-on-surface-variant px-1"
@@ -32,7 +62,9 @@ new class extends Component {
                                 class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline text-sm">person</span>
                             <input
                                 class="w-full h-14 pl-12 pr-4 bg-surface-container-lowest border border-outline-variant rounded-xl font-body-base text-on-surface transition-all"
-                                id="fullname" placeholder="Juan Pérez" type="text" />
+                                id="fullname" 
+                                placeholder="Juan Pérez" type="text" 
+                                wire:model="fullname"/>
                         </div>
                     </div>
                     <!-- Email -->
@@ -44,7 +76,7 @@ new class extends Component {
                                 class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline text-sm">alternate_email</span>
                             <input
                                 class="w-full h-14 pl-12 pr-4 bg-surface-container-lowest border border-outline-variant rounded-xl font-body-base text-on-surface transition-all"
-                                id="email" placeholder="hola@tuempresa.pe" type="email" />
+                                id="email" placeholder="hola@tuempresa.pe" type="email" wire:model="email"/>
                         </div>
                     </div>
                     <!-- Password Cluster -->
@@ -57,7 +89,7 @@ new class extends Component {
                                     class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline text-sm">lock</span>
                                 <input
                                     class="w-full h-14 pl-12 pr-4 bg-surface-container-lowest border border-outline-variant rounded-xl font-body-base text-on-surface transition-all"
-                                    id="password" placeholder="••••••••" type="password" />
+                                    id="password" placeholder="••••••••" type="password" wire:model="password"/>
                             </div>
                         </div>
                         <div class="space-y-2">
@@ -68,7 +100,7 @@ new class extends Component {
                                     class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline text-sm">enhanced_encryption</span>
                                 <input
                                     class="w-full h-14 pl-12 pr-4 bg-surface-container-lowest border border-outline-variant rounded-xl font-body-base text-on-surface transition-all"
-                                    id="confirm_password" placeholder="••••••••" type="password" />
+                                    id="confirm_password" placeholder="••••••••" type="password" wire:model="password_confirmation" />
                             </div>
                         </div>
                     </div>
@@ -88,14 +120,14 @@ new class extends Component {
                     <!-- Primary CTA -->
                     <button
                         class="w-full h-14 mt-stack-md bg-navy-container text-secondary-fixed font-bold rounded-full shadow-lg hover:shadow-xl active:scale-[0.98] transition-all flex items-center justify-center gap-2 group"
-                        type="submit"
-                        href=" {{ route('login') }} "
-                        wire:navigate>
+                        type="submit">
                         <span>Crear cuenta</span>
                         <span
                             class="material-symbols-outlined text-[20px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
                     </button>
                 </form>
+                
+                
                 <div class="mt-8 pt-8 border-t border-outline-variant/30 flex flex-col items-center gap-4">
                     <p class="text-on-surface-variant text-sm">
                         ¿Ya tienes cuenta?

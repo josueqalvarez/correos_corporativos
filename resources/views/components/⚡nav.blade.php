@@ -12,7 +12,7 @@ new class extends Component {
         'dominio-y-hosting-email' => 'Dominio y Hosting Email',
         'contacto' => 'Contáctanos',
         #'opiniones' => 'Opiniones',
-        'faq' => 'Preguntas frecuentes',
+        #'faq' => 'Preguntas frecuentes',
     ];
 
     public string $currentRoute = 'text-secondary-fixed font-bold border-b-2 border-secondary-fixed pb-1 font-label-sm text-label-sm';
