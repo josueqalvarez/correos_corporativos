@@ -1,0 +1,2 @@
+middleware (creo)
+- Al crear comentario sin iniciar sesion, debe aparecer un popup de inicio de sesion, sino da error

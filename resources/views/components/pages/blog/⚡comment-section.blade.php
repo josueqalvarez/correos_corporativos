@@ -6,16 +6,15 @@ use App\Models\Comment;
 new class extends Component {
     public $blog;
     public string $content = '';
-    public ?int $parentCommentId = null;
 
-    public function save()
+    public function save(?int $parentCommentId = null)
     {
         if (!empty($this->content)) {
             Comment::create([
                 'content' => $this->content,
                 'user_id' => auth()->id(),
                 'blog_id' => $this->blog->id, // Reemplaza con el ID del blog correspondiente
-                'parent_comment_id' => $this->parentCommentId, // Si es un comentario principal, de lo contrario, asigna el ID del comentario padre
+                'parent_comment_id' => $parentCommentId,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
@@ -24,12 +23,11 @@ new class extends Component {
         }
     }
 
-    public bool $showReplyForm = false;
+    public ?int $validar_comentario = null;
 
     public function toggleReplyForm(?int $parentCommentId = null)
     {
-        $this->showReplyForm = !$this->showReplyForm;
-        $this->parentCommentId = $parentCommentId;
+        $this->validar_comentario = $this->validar_comentario === $parentCommentId ? null : $parentCommentId;
     }
 };
 ?>
@@ -45,58 +43,72 @@ new class extends Component {
         <div class="rounded-2xl border border-outline-variant/20 bg-surface-container-low p-6">
             <div class="flex flex-col items-start gap-4">
 
-                @foreach ($blog->comments()->latest()->get() as $comment)
-                    <div class="rounded-2xl border border-outline-variant/20 bg-surface-container-lowest p-4 w-full">
+                @foreach ($blog->comments()->where('parent_comment_id', null)->latest()->get() as $comment)
+                    <article class="w-full rounded-2xl border border-outline-variant/20 bg-surface-container-lowest p-4 md:p-5 shadow-sm">
                         <div class="flex items-center gap-4">
                             <div
-                                class="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-lg font-bold text-on-primary">
+                                class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary text-lg font-bold text-on-primary">
                                 {{ strtoupper(substr($comment->user->name, 0, 2)) }}
                             </div>
-                            <h3 class="font-bold text-primary ">{{ $comment->user->name }}</h3>
+                            <h3 class="font-bold text-primary">{{ $comment->user->name }}</h3>
                         </div>
 
-                        <p class="mt-2 text-on-surface-variant">
+                        <p class="mt-3 text-on-surface-variant">
                             {{ $comment->content }}
                         </p>
-                    </div>
 
-                    @if (!$showReplyForm)
-                        <a class="text-sm text-on-surface-variant cursor-pointer" wire:click.prevent="toggleReplyForm({{ $comment->id }})">
-                            Responder </a>
-                    @else
-                        <div
-                            class="flex rounded-2xl border border-outline-variant/20 bg-surface-container-low p-6 w-full gap-4">
-                            <textarea
-                                class=" w-full rounded-2xl border border-outline-variant/30 bg-surface-container-lowest px-4 py-3 text-body-base outline-none ring-0 focus:border-secondary"
-                                id="blog-response" placeholder="Escribe un comentario..." wire:model='content'></textarea>
-                            <div class="flex gap-3 sm:flex-row">
-                                <button
-                                    class="rounded-full bg-primary px-4 font-bold text-on-primary transition-transform hover:scale-[1.01]"
-                                    wire:click='save()'>
-                                    Comentar
-                                </button>
-                                <button
-                                    class="rounded-full bg-outline-variant/20 px-4 font-bold text-on-surface-variant transition-transform hover:scale-[1.01]"
-                                    wire:click.prevent="toggleReplyForm">
-                                    Cancelar
-                                </button>
-                            </div>
+                        {{-- Escribir respuesta --}}
+                        <div class="mt-4">
+                            @if ($validar_comentario !== $comment->id)
+                                <a class="inline-flex cursor-pointer rounded-full px-3 py-1.5 text-sm font-medium text-on-surface-variant transition-colors hover:bg-surface-container-high"
+                                    wire:click.prevent="toggleReplyForm({{ $comment->id }})">
+                                    Responder
+                                </a>
+                            @else
+                                <div
+                                    class="ml-6 mt-2 rounded-2xl border-l-2 border-primary/30 bg-surface-container-low p-4 md:ml-8">
+                                    <textarea
+                                        class="w-full rounded-2xl border border-outline-variant/30 bg-surface-container-lowest px-4 py-3 text-body-base outline-none ring-0 focus:border-secondary"
+                                        id="blog-response" placeholder="Escribe una respuesta..." wire:model='content'></textarea>
+                                    <div class="mt-3 flex flex-wrap gap-3">
+                                        <button
+                                            class="rounded-full bg-primary px-4 py-2 font-bold text-on-primary transition-transform hover:scale-[1.01]"
+                                            wire:click='save( {{ $comment->id }})'>
+                                            Responder
+                                        </button>
+                                        <button
+                                            class="rounded-full bg-outline-variant/20 px-4 py-2 font-bold text-on-surface-variant transition-transform hover:scale-[1.01]"
+                                            wire:click.prevent="toggleReplyForm({{ $comment->id }})">
+                                            Cancelar
+                                        </button>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
-                    @endif
 
-                    @if ($comment->replies()->exists())
-                    @endif
+                        {{-- Respuestas del comentario --}}
+                        @if ($comment->replies()->exists())
+                            <div class="mt-4 space-y-3 border-l-2 border-outline-variant/30 pl-4 md:ml-8 md:pl-6">
+                                @foreach ($comment->replies()->latest()->get() as $reply)
+                                    <div class="rounded-2xl border border-outline-variant/20 bg-surface-container-low p-4">
+                                        <div class="flex items-center gap-3">
+                                            <div
+                                                class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-on-primary">
+                                                {{ strtoupper(substr($reply->user->name, 0, 2)) }}
+                                            </div>
+                                            <p class="text-sm font-semibold text-primary">{{ $reply->user->name }}</p>
+                                        </div>
+                                        <p class="mt-2 text-sm text-on-surface-variant">{{ $reply->content }}</p>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endif
+                    </article>
                 @endforeach
 
             </div>
 
-            {{-- Respuesta a comentario plantilla --}}
-            <div class="mt-4 rounded-2xl border border-outline-variant/20 bg-surface-container-lowest p-4">
-                <p class="text-sm font-semibold text-primary">Respuesta a Karla Sevina</p>
-                <p class="mt-2 text-sm text-on-surface-variant">Exactamente, mantenerlo ordenado desde el inicio evita
-                    muchos problemas de entregabilidad y hace más sencilla la migración futura.
-                </p>
-            </div>
+
         </div>
 
         {{-- Comentario --}}
