@@ -36,7 +36,7 @@ new class extends Component {
 
     public string $actual_content = '';
     public string $actual_option = '';
-  
+
     public function cambiar_tab($tab)
     {
         $this->tab = $tab;
@@ -53,9 +53,8 @@ new class extends Component {
                 break;
             }
         }
-
     }
-  
+
     public function mount()
     {
         $this->user = Auth::user();
@@ -78,10 +77,7 @@ new class extends Component {
                         data-alt="Professional headshot of a corporate tech administrator for MailCore Peru, dressed in a sleek charcoal suit with a friendly and confident expression. The background is a soft-focus high-tech office with minimalist white and deep navy tones, lit with clean clinical light."
                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlzxauFP56St8f_poylwQDMOnLSrl5RREct3ssxtvETAblxnC4eTI95D7tNqhvdIP7yxOv-yYNzd2qInAhjG4h19vm7LG_ha4Nnohg5XC9MdEFuLkIg6CGE0YFX_QqGcieAhgqTn6fkkrEiMl_Y2X-Kr6LF-WDomozSBI_4e4oyqhrElu_V8-YgnX4BeyNmkYcnoacy7yGukcngmjkVcdceUi09bQKK6G2LwE8P9M8ZJ7pQ7zle7DRFQ" />
                 </div>
-                <div class="flex flex-col">
-                    <span class="text-secondary-fixed font-bold text-sm">Infrastructure Admin</span>
-                    <span class="text-on-navy-container text-xs">Premium Tier</span>
-                </div>
+                <span class="text-secondary-fixed font-bold text-sm">{{ $this->user->name }}</span>
             </div>
             <!-- Navigation Links -->
             <nav class="flex-1 space-y-2">

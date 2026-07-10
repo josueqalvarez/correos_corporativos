@@ -37,9 +37,9 @@ new class extends Component {
 ?>
 
 <div class="w-full max-w-xl mx-auto px-4 sm:px-6 md:px-8 py-8 md:py-12 lg:py-16">
-    <div class="w-full max-auto max-w-[480px]">
+    <div class="w-full max-auto max-w-120">
         <!-- Registration Card -->
-        <div class="glass-card rounded-[32px] p-stack-lg shadow-2xl relative overflow-hidden">
+        <div class="glass-card rounded-4xl p-stack-lg shadow-2xl relative overflow-hidden">
             <!-- Decorative background blur element -->
             <div class="absolute -top-24 -right-24 w-48 h-48 bg-secondary-container/30 blur-[80px] rounded-full"></div>
             <div class="relative z-10">

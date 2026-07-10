@@ -2,13 +2,50 @@
 
 use Livewire\Component;
 use Livewire\Attributes\Layout;
+use app\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 new class extends Component {
     #[Layout('layouts.index')]
+    public User $user;
+
+    public function borrar_cuenta()
+    {
+        User::where('id', $this->user->id)->delete();
+
+        redirect()->route('home');
+    }
+
+    public string $current_password = '';
+    public string $new_password = '';
+    public string $new_password_confirmation = '';
+
+    public function update_password()
+    {
+        
+        $this->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|string|min:3|confirmed',
+            'new_password_confirmation' => 'required|same:new_password',
+        ]);
+
+        if (!Hash::check($this->current_password, $this->user->password)) {
+            $this->addError('current_password', 'La contraseña actual es incorrecta.');
+            $this->reset(['new_password', 'new_password_confirmation']);
+            return;
+        }
+
+        $this->user->update([
+            'password' => Hash::make($this->new_password),
+        ]);
+
+        $this->reset(['current_password', 'new_password', 'new_password_confirmation']);
+        session()->flash('success', 'Contraseña actualizada exitosamente.');
+    }
 };
 ?>
 
-<div class="max-w-[1280px] mx-auto p-margin-x md:p-12 space-y-stack-lg">
+<div class="max-w-7xl mx-auto p-margin-x md:p-12 space-y-stack-lg">
     <!-- Page Header -->
     <section class="mb-stack-lg">
         <h1 class="font-headline-lg text-headline-lg text-primary mb-2">Ajustes</h1>
@@ -30,7 +67,10 @@ new class extends Component {
                         actual</label>
                     <input
                         class="w-full bg-surface-container-lowest border border-outline-variant/40 rounded-xl px-4 py-3 focus:ring-2 focus:ring-secondary outline-none transition-all"
-                        placeholder="••••••••" type="password" />
+                        placeholder="••••••••" type="password" wire:model="current_password" />
+                    @error('current_password')
+                        <span class="text-sm text-error">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
@@ -39,7 +79,10 @@ new class extends Component {
                             contraseña</label>
                         <input
                             class="w-full bg-surface-container-lowest border border-outline-variant/40 rounded-xl px-4 py-3 focus:ring-2 focus:ring-secondary outline-none transition-all"
-                            placeholder="••••••••" type="password" />
+                            placeholder="••••••••" type="password" wire:model="new_password" />
+                        @error('new_password')
+                            <span class="text-sm text-error">{{ $message }}</span>
+                        @enderror
                     </div>
                     <div>
                         <label
@@ -47,15 +90,21 @@ new class extends Component {
                             contraseña</label>
                         <input
                             class="w-full bg-surface-container-lowest border border-outline-variant/40 rounded-xl px-4 py-3 focus:ring-2 focus:ring-secondary outline-none transition-all"
-                            placeholder="••••••••" type="password" />
+                            placeholder="••••••••" type="password" wire:model="new_password_confirmation" />
+                        @error('new_password_confirmation')
+                            <span class="text-sm text-error">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
                 <div class="pt-4">
                     <button
                         class="bg-primary text-on-primary font-bold px-8 py-3 rounded-full hover:shadow-lg transition-all active:scale-[0.98]"
-                        type="button">
+                        type="button" wire:click.prevent="update_password">
                         Actualizar contraseña
                     </button>
+                    @if (session()->has('success'))
+                        <span class="text-sm text-success ml-4">{{ session('success') }}</span>
+                    @endif
                 </div>
             </form>
         </div>
@@ -70,23 +119,13 @@ new class extends Component {
                 Una vez que elimines tu cuenta, no hay vuelta atrás. Por favor, asegúrate antes de proceder.
             </p>
             <button
-                class="w-8/12 bg-white border-2 border-error text-error font-bold py-3 rounded-xl hover:bg-error hover:text-on-error transition-all duration-300">
+                class="w-8/12 bg-white border-2 border-error text-error font-bold py-3 rounded-xl hover:bg-error hover:text-on-error transition-all duration-300"
+                wire:click.prevent="borrar_cuenta">
                 Eliminar cuenta
             </button>
         </div>
 
 
     </div>
-    <!-- Footer Stats / Meta -->
-    <div
-        class="pt-stack-lg border-t border-outline-variant/20 flex flex-col md:flex-row justify-between items-center gap-4 text-on-surface-variant text-xs font-label-mono uppercase tracking-widest">
-        <div class="flex items-center gap-4">
-            <span>Versión de API: 2.4.1-stable</span>
-            <span class="w-1 h-1 bg-outline rounded-full"></span>
-            <span>Región: EU-West-1</span>
-        </div>
-        <div>
-            Último acceso: Hace 12 minutos desde Madrid, ES
-        </div>
-    </div>
+
 </div>
