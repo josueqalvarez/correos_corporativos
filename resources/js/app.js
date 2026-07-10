@@ -30,18 +30,33 @@ function toggleAccordion(element) {
     item.classList.toggle('active');
 }
 
-// Search highlight logic
-const searchInput = document.querySelector('input[type="text"]');
-searchInput.addEventListener('input', (e) => {
-    const term = e.target.value.toLowerCase();
-    const items = document.querySelectorAll('.accordion-item');
+// // Search highlight logic
+// const searchInput = document.querySelector('input[type="text"]');
+// searchInput.addEventListener('input', (e) => {
+//     const term = e.target.value.toLowerCase();
+//     const items = document.querySelectorAll('.accordion-item');
 
-    items.forEach(item => {
-        const text = item.querySelector('span').textContent.toLowerCase();
-        if (text.includes(term)) {
-            item.style.display = 'block';
-        } else {
-            item.style.display = 'none';
-        }
+//     items.forEach(item => {
+//         const text = item.querySelector('span').textContent.toLowerCase();
+//         if (text.includes(term)) {
+//             item.style.display = 'block';
+//         } else {
+//             item.style.display = 'none';
+//         }
+//     });
+// });
+
+
+// Activity profile
+document.addEventListener('livewire:init', () => {
+    Livewire.on('borrar_page', (event) => {
+
+        console.log('Evento recibido: borrar_page');
+        
+        const url = new URL(window.location);
+        url.searchParams.delete('page');
+        
+        window.history.replaceState({}, '', url);
+    
     });
 });

@@ -3,6 +3,8 @@
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Url;
+use App\Models\User;
 
 new class extends Component {
     #[Layout('layouts.index')]
@@ -24,32 +26,40 @@ new class extends Component {
         ],
     ];
 
-    public string $active_option = 'flex items-center gap-3 px-4 py-3 rounded-xl bg-on-tertiary-fixed-variant text-secondary-fixed font-bold border-l-4 border-secondary transition-all active:scale-95 duration-200';
+    #[Url]
+    public string $tab = 'Activity';
 
+    public User $user;
+
+    public string $active_option = 'flex items-center gap-3 px-4 py-3 rounded-xl bg-on-tertiary-fixed-variant text-secondary-fixed font-bold border-l-4 border-secondary transition-all active:scale-95 duration-200';
     public string $inactive_option = 'flex items-center gap-3 px-4 py-3 text-on-tertiary-container hover:text-on-tertiary-fixed hover:bg-on-tertiary-fixed-variant/50 rounded-xl transition-colors active:scale-95 duration-200';
 
-    public string $actual_option;
-    public string $actual_content;
-
-    public $user;
-    
-    public function mount()
+    public string $actual_content = '';
+    public string $actual_option = '';
+  
+    public function cambiar_tab($tab)
     {
-        $this->actual_option = $this->nav_options[0]['Title'];
-        $this->actual_content = $this->nav_options[0]['Content'];
+        $this->tab = $tab;
 
-        $this->user = Auth::user();
-    }
-
-    public function change_option($option)
-    {
         foreach ($this->nav_options as $nav_option) {
-            if ($nav_option['Title'] === $option) {
-                $this->actual_option = $option;
+            if ($nav_option['Title'] === $tab) {
+                $this->actual_option = $tab;
                 $this->actual_content = $nav_option['Content'];
+
+                if ($tab !== 'Activity') {
+                    $this->dispatch('borrar_page');
+                }
+
                 break;
             }
         }
+
+    }
+  
+    public function mount()
+    {
+        $this->user = Auth::user();
+        $this->cambiar_tab($this->tab);
     }
 };
 ?>
@@ -77,8 +87,8 @@ new class extends Component {
             <nav class="flex-1 space-y-2">
                 <!-- Active State: Activity -->
                 @foreach ($this->nav_options as $option)
-                    <a class="cursor-pointer {{ $option['Title'] === $this->actual_option ? $active_option : $inactive_option }} "
-                        wire:click.prevent="change_option('{{ $option['Title'] }}')">
+                    <a class="cursor-pointer {{ $option['Title'] === $this->tab ? $active_option : $inactive_option }} "
+                        wire:click.prevent="cambiar_tab('{{ $option['Title'] }}')">
 
                         <span class="material-symbols-outlined" data-icon="{{ $option['Icon'] }}">
                             {{ $option['Icon'] }}
