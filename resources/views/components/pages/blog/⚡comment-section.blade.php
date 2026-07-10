@@ -2,32 +2,47 @@
 
 use Livewire\Component;
 use App\Models\Comment;
+use App\Models\User;
 
 new class extends Component {
     public $blog;
-    public string $content = '';
+    public User $user;
+    public array $content = [];
+    public ?int $validar_comentario = null;
 
-    public function save(?int $parentCommentId = null)
+    public function delete(int $commentId)
     {
-        if (!empty($this->content)) {
-            Comment::create([
-                'content' => $this->content,
-                'user_id' => auth()->id(),
-                'blog_id' => $this->blog->id, // Reemplaza con el ID del blog correspondiente
-                'parent_comment_id' => $parentCommentId,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
+        $comment = Comment::find($commentId);
 
-            $this->content = '';
+        if ($comment && $comment->user_id === auth()->id()) {
+            $comment->delete();
         }
     }
+    public function save(?int $parentCommentId = null)
+    {
+        Comment::create([
+            'content' => $this->content[$parentCommentId] ?? '',
+            'user_id' => auth()->id(),
+            'blog_id' => $this->blog->id, // Reemplaza con el ID del blog correspondiente
+            'parent_comment_id' => $parentCommentId,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
 
-    public ?int $validar_comentario = null;
+        $this->content[$parentCommentId] = '';
+
+        $this->toggleReplyForm($parentCommentId);
+    }
 
     public function toggleReplyForm(?int $parentCommentId = null)
     {
         $this->validar_comentario = $this->validar_comentario === $parentCommentId ? null : $parentCommentId;
+    }
+
+    public function mount($blog)
+    {
+        $this->blog = $blog;
+        $this->user = auth()->user();
     }
 };
 ?>
@@ -44,7 +59,8 @@ new class extends Component {
             <div class="flex flex-col items-start gap-4">
 
                 @foreach ($blog->comments()->where('parent_comment_id', null)->latest()->get() as $comment)
-                    <article class="w-full rounded-2xl border border-outline-variant/20 bg-surface-container-lowest p-4 md:p-5 shadow-sm">
+                    <article
+                        class="w-full rounded-2xl border border-outline-variant/20 bg-surface-container-lowest p-4 md:p-5 shadow-sm">
                         <div class="flex items-center gap-4">
                             <div
                                 class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary text-lg font-bold text-on-primary">
@@ -57,7 +73,7 @@ new class extends Component {
                             {{ $comment->content }}
                         </p>
 
-                        {{-- Escribir respuesta --}}
+                        {{-- Escribir respuesta al comentario --}}
                         <div class="mt-4">
                             @if ($validar_comentario !== $comment->id)
                                 <a class="inline-flex cursor-pointer rounded-full px-3 py-1.5 text-sm font-medium text-on-surface-variant transition-colors hover:bg-surface-container-high"
@@ -69,11 +85,11 @@ new class extends Component {
                                     class="ml-6 mt-2 rounded-2xl border-l-2 border-primary/30 bg-surface-container-low p-4 md:ml-8">
                                     <textarea
                                         class="w-full rounded-2xl border border-outline-variant/30 bg-surface-container-lowest px-4 py-3 text-body-base outline-none ring-0 focus:border-secondary"
-                                        id="blog-response" placeholder="Escribe una respuesta..." wire:model='content'></textarea>
+                                        id="blog-response" placeholder="Escribe una respuesta..." wire:model='content.{{ $comment->id }}'></textarea>
                                     <div class="mt-3 flex flex-wrap gap-3">
                                         <button
                                             class="rounded-full bg-primary px-4 py-2 font-bold text-on-primary transition-transform hover:scale-[1.01]"
-                                            wire:click='save( {{ $comment->id }})'>
+                                            wire:click.prevent='save({{ $comment->id }})'>
                                             Responder
                                         </button>
                                         <button
@@ -90,7 +106,8 @@ new class extends Component {
                         @if ($comment->replies()->exists())
                             <div class="mt-4 space-y-3 border-l-2 border-outline-variant/30 pl-4 md:ml-8 md:pl-6">
                                 @foreach ($comment->replies()->latest()->get() as $reply)
-                                    <div class="rounded-2xl border border-outline-variant/20 bg-surface-container-low p-4">
+                                    <div
+                                        class="rounded-2xl border border-outline-variant/20 bg-surface-container-low p-4">
                                         <div class="flex items-center gap-3">
                                             <div
                                                 class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-on-primary">
@@ -99,6 +116,15 @@ new class extends Component {
                                             <p class="text-sm font-semibold text-primary">{{ $reply->user->name }}</p>
                                         </div>
                                         <p class="mt-2 text-sm text-on-surface-variant">{{ $reply->content }}</p>
+                                        @if ($reply->user_id === $user->id)
+                                            <div class="mt-2 flex gap-3">
+                                                <button
+                                                    class="text-sm font-medium text-error transition-colors hover:text-error/80 cursor-pointer"
+                                                    wire:click='delete({{ $reply->id }})'>
+                                                    Eliminar
+                                                </button>
+                                            </div>
+                                        @endif
                                     </div>
                                 @endforeach
                             </div>
@@ -111,13 +137,13 @@ new class extends Component {
 
         </div>
 
-        {{-- Comentario --}}
+        {{-- Escribir comentario al blog --}}
         <div class="rounded-2xl border border-outline-variant/20 bg-surface-container-low p-6">
             <label class="mb-2 block font-bold text-primary" for="blog-response">
                 Escribe un comentario al blog</label>
             <textarea
                 class="min-h-28 w-full rounded-2xl border border-outline-variant/30 bg-surface-container-lowest px-4 py-3 text-body-base outline-none ring-0 focus:border-secondary"
-                id="blog-response" placeholder="Escribe un comentario..." wire:model='content'></textarea>
+                id="blog-response" placeholder="Escribe un comentario..." wire:model='content.blog'></textarea>
             <div class="mt-4 flex flex-col gap-3 sm:flex-row">
                 <button
                     class="rounded-full bg-primary px-6 py-3 font-bold text-on-primary transition-transform hover:scale-[1.01]"

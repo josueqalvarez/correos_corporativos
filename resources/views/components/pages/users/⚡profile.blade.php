@@ -2,6 +2,7 @@
 
 use Livewire\Component;
 use Livewire\Attributes\Layout;
+use Illuminate\Support\Facades\Auth;
 
 new class extends Component {
     #[Layout('layouts.index')]
@@ -9,17 +10,17 @@ new class extends Component {
         [
             'Title' => 'Activity',
             'Icon' => 'Analytics',
-            'Content' => 'profile_activity',
+            'Content' => 'pages.users.profile_activity',
         ],
         [
             'Title' => 'Personal Data',
             'Icon' => 'Person',
-            'Content' => 'profile_information',
+            'Content' => 'pages.users.profile_information',
         ],
         [
             'Title' => 'Settings',
             'Icon' => 'Settings',
-            'Content' => 'profile_settings',
+            'Content' => 'pages.users.profile_settings',
         ],
     ];
 
@@ -30,10 +31,14 @@ new class extends Component {
     public string $actual_option;
     public string $actual_content;
 
+    public $user;
+    
     public function mount()
     {
         $this->actual_option = $this->nav_options[0]['Title'];
         $this->actual_content = $this->nav_options[0]['Content'];
+
+        $this->user = Auth::user();
     }
 
     public function change_option($option)
@@ -52,51 +57,51 @@ new class extends Component {
 <div class="min-h-screen bg-background">
 
     <div class="flex min-h-screen">
-    <!-- Sidebar Shell -->
-    <aside class="sticky top-18 z-10 h-[calc(100vh-4.5rem)] max-h-[calc(100vh-4.5rem)] w-64 shrink-0 overflow-y-auto bg-navy-container flex flex-col p-stack-md shadow-sm pb-24">
+        <!-- Sidebar Shell -->
+        <aside
+            class="sticky top-18 z-10 h-[calc(100vh-4.5rem)] max-h-[calc(100vh-4.5rem)] w-64 shrink-0 overflow-y-auto bg-navy-container flex flex-col p-stack-md shadow-sm pb-24">
 
-        <!-- User Profile Mini -->
-        <div class="flex items-center gap-3 px-4 mb-10 pt-4">
-            <div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container-highest">
-                <img class="w-full h-full object-cover"
-                    data-alt="Professional headshot of a corporate tech administrator for MailCore Peru, dressed in a sleek charcoal suit with a friendly and confident expression. The background is a soft-focus high-tech office with minimalist white and deep navy tones, lit with clean clinical light."
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlzxauFP56St8f_poylwQDMOnLSrl5RREct3ssxtvETAblxnC4eTI95D7tNqhvdIP7yxOv-yYNzd2qInAhjG4h19vm7LG_ha4Nnohg5XC9MdEFuLkIg6CGE0YFX_QqGcieAhgqTn6fkkrEiMl_Y2X-Kr6LF-WDomozSBI_4e4oyqhrElu_V8-YgnX4BeyNmkYcnoacy7yGukcngmjkVcdceUi09bQKK6G2LwE8P9M8ZJ7pQ7zle7DRFQ" />
+            <!-- User Profile Mini -->
+            <div class="flex items-center gap-3 px-4 mb-10 pt-4">
+                <div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container-highest">
+                    <img class="w-full h-full object-cover"
+                        data-alt="Professional headshot of a corporate tech administrator for MailCore Peru, dressed in a sleek charcoal suit with a friendly and confident expression. The background is a soft-focus high-tech office with minimalist white and deep navy tones, lit with clean clinical light."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlzxauFP56St8f_poylwQDMOnLSrl5RREct3ssxtvETAblxnC4eTI95D7tNqhvdIP7yxOv-yYNzd2qInAhjG4h19vm7LG_ha4Nnohg5XC9MdEFuLkIg6CGE0YFX_QqGcieAhgqTn6fkkrEiMl_Y2X-Kr6LF-WDomozSBI_4e4oyqhrElu_V8-YgnX4BeyNmkYcnoacy7yGukcngmjkVcdceUi09bQKK6G2LwE8P9M8ZJ7pQ7zle7DRFQ" />
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-secondary-fixed font-bold text-sm">Infrastructure Admin</span>
+                    <span class="text-on-navy-container text-xs">Premium Tier</span>
+                </div>
             </div>
-            <div class="flex flex-col">
-                <span class="text-secondary-fixed font-bold text-sm">Infrastructure Admin</span>
-                <span class="text-on-navy-container text-xs">Premium Tier</span>
-            </div>
-        </div>
-        <!-- Navigation Links -->
-        <nav class="flex-1 space-y-2">
-            <!-- Active State: Activity -->
-            @foreach ($this->nav_options as $option)
-                <a class="cursor-pointer {{ $option['Title'] === $this->actual_option ? $active_option : $inactive_option }} "
-                    wire:click.prevent="change_option('{{ $option['Title'] }}')">
+            <!-- Navigation Links -->
+            <nav class="flex-1 space-y-2">
+                <!-- Active State: Activity -->
+                @foreach ($this->nav_options as $option)
+                    <a class="cursor-pointer {{ $option['Title'] === $this->actual_option ? $active_option : $inactive_option }} "
+                        wire:click.prevent="change_option('{{ $option['Title'] }}')">
 
-                    <span class="material-symbols-outlined" data-icon="{{ $option['Icon'] }}">
-                        {{ $option['Icon'] }}
-                    </span>
-                    <span>{{ $option['Title'] }}
-                    </span>
+                        <span class="material-symbols-outlined" data-icon="{{ $option['Icon'] }}">
+                            {{ $option['Icon'] }}
+                        </span>
+                        <span>{{ $option['Title'] }}
+                        </span>
 
+                    </a>
+                @endforeach
+
+
+                <a class="flex items-center gap-3 px-4 py-3 text-on-tertiary-container hover:text-error transition-colors"
+                    href="{{ route('home') }}" wire:navigate>
+                    <span class="material-symbols-outlined" data-icon="logout">logout</span>
+                    <span>Logout</span>
                 </a>
-            @endforeach
+            </nav>
+            <!-- Bottom Actions -->
 
-
-        <a class="flex items-center gap-3 px-4 py-3 text-on-tertiary-container hover:text-error transition-colors"
-                href="{{ route('home') }}"
-                wire:navigate>
-                <span class="material-symbols-outlined" data-icon="logout">logout</span>
-                <span>Logout</span>
-            </a>
-        </nav>
-        <!-- Bottom Actions -->
- 
-    </aside>
-    <!-- section Content Canvas -->
-    <section class="flex-1 min-h-screen bg-background pb-24 pt-6">
-        <livewire:dynamic-component :component="$this->actual_content" :key="$this->actual_content" />
-    </section>
-</div>
+        </aside>
+        <!-- section Content Canvas -->
+        <section class="flex-1 min-h-screen bg-background pb-24 pt-6">
+            <livewire:dynamic-component :component="$this->actual_content" :key="$this->actual_content" :user="$this->user" />
+        </section>
+    </div>
 </div>
