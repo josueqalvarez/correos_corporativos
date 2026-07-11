@@ -3,16 +3,69 @@
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use App\Models\User;
+use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
 
 new class extends Component {
+    use WithFileUploads;
     #[Layout('layouts.index')]
     public User $user;
 
     public string $new_name = '';
     public string $new_lastname = '';
-    public string $new_email = '';
     public string $new_phone = '';
 
+    public $profile_photo = null; // Se guarda la foto de perfil temporalmente antes de subirla al servidor
+    public string $path = ''; // Se guarda la ruta de la foto de perfil en el servidor después de subirla
+
+    public function actualizar_datos()
+    {
+        $this->validate([
+            'new_name' => 'nullable|string|max:255',
+            'new_lastname' => 'nullable|string|max:255',
+            'new_phone' => 'nullable|string|max:20',
+            'profile_photo' => 'nullable|image|mimes:jpg,jpeg,png,webp,gif|max:1024', // 1MB Max
+        ]);
+
+        if ($this->profile_photo) {
+            $this->path = $this->profile_photo->store('profiles', 'public');
+        }
+
+        $this->user->update([
+            'name' => $this->new_name,
+            'lastname' => $this->new_lastname,
+            'phone' => $this->new_phone,
+            'image' => $this->path,
+        ]);
+
+        session()->flash('message', 'Datos actualizados correctamente.');
+
+        $this->profile_photo = null;
+    }
+
+    public function borrar_foto(): void
+    {
+        if ($this->profile_photo) {
+            $this->reset('profile_photo');
+
+            return;
+        }
+
+        if ($this->user->image) {
+            Storage::disk('public')->delete($this->user->image);
+            $this->user->update(['image' => null]);
+            $this->user->refresh();
+            $this->path = '';
+        }
+    }
+
+    public function mount()
+    {
+        $this->new_name = $this->user->name;
+        $this->new_lastname = $this->user->lastname ? $this->user->lastname : '';
+        $this->new_phone = $this->user->phone ? $this->user->phone : '';
+        $this->path = $this->user->image ?? '';
+    }
 };
 ?>
 
@@ -29,20 +82,49 @@ new class extends Component {
         <!-- Main Form Section (Bento Large) -->
         <div class="lg:col-span-8">
             <div class="bg-surface-container-lowest rounded-3xl p-8 shadow-sm border border-outline-variant/20">
-                <form class="space-y-6">
+                <form class="space-y-6" wire:submit.prevent="actualizar_datos">
                     <div class="flex gap-6">
                         {{-- Imagen de perfil --}}
                         <div class="flex flex-col items-center gap-4 w-64">
-                            <img class=" w-32 h-32 rounded-full object-cover"
-                                src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-                                alt="Profile Picture" />
+                            {{-- Renderizado de foto de perfil o iniciales del nombre --}}
+                            <div
+                                class="flex h-48 w-48 shrink-0 items-center justify-center rounded-full bg-primary text-lg font-bold text-on-primary">
+                                @if ($profile_photo && $profile_photo->isPreviewable())
+                                    <img src="{{ $profile_photo->temporaryUrl() }}" alt="Profile Picture"
+                                        class="h-full w-full rounded-full object-cover" />
+                                @elseif ($user->image)
+                                    <img src="{{ asset('storage/' . $user->image) }}" alt="Profile Picture"
+                                        class="h-full w-full rounded-full object-cover" />
+                                @else
+                                    {{ strtoupper(substr($user->name, 0, 2)) }}
+                                @endif
+                            </div>
+
+                            {{-- Botones de interaccion con la foto de perfil --}}
                             <div class="flex flex-col gap-2">
+
+                                <input class="hidden" type="file" id="profile_photo" wire:model="profile_photo"
+                                    accept=".jpg,.jpeg,.png,.webp,.gif" />
                                 <button
                                     class="mt-2 bg-primary text-on-primary font-bold rounded-full px-6 py-2 shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-soft"
-                                    type="button">Cambiar foto</button>
-                                <button
-                                    class="mt-2 bg-error text-on-error font-bold rounded-full px-6 py-2 shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-soft"
-                                    type="button">Eliminar foto</button>
+                                    type="button" onclick="document.getElementById('profile_photo').click()">
+                                    {{ $user->image || $profile_photo ? 'Cambiar foto' : 'Subir foto' }}
+                                </button>
+                                @error('profile_photo')
+                                    <p class="text-sm text-error max-w-64">{{ $message }}</p>
+                                @enderror
+                                @if ($profile_photo)
+                                    <button
+                                        class="mt-2 bg-gray-500 text-on-primary font-bold rounded-full px-6 py-2 shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-soft"
+                                        type="button" wire:click="borrar_foto"> Quitar foto seleccionada
+                                    </button>
+                                @endif
+                                @if ($user->image)
+                                    <button
+                                        class="mt-2 bg-error text-on-error font-bold rounded-full px-6 py-2 shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-soft"
+                                        type="button" wire:click="borrar_foto"> Borrar foto</button>
+                                @endif
+
                             </div>
                         </div>
                         {{-- Informacion personal --}}
@@ -53,7 +135,7 @@ new class extends Component {
                                     class="font-label-mono text-label-mono text-on-surface-variant block">NOMBRE</label>
                                 <input
                                     class="w-full bg-surface-container-low border-outline-variant rounded-xl px-4 py-3 focus:ring-2 focus:ring-secondary focus:border-transparent transition-soft font-body-base text-body-base"
-                                    placeholder="{{ $user->name }}" type="text" wire:model="new_name" />
+                                    type="text" wire:model="new_name" />
                             </div>
                             <!-- Field: Apellido -->
                             <div class="space-y-2">
@@ -61,15 +143,15 @@ new class extends Component {
                                     class="font-label-mono text-label-mono text-on-surface-variant block">APELLIDO</label>
                                 <input
                                     class="w-full bg-surface-container-low border-outline-variant rounded-xl px-4 py-3 focus:ring-2 focus:ring-secondary focus:border-transparent transition-soft font-body-base text-body-base"
-                                    placeholder="Introduce tu apellido" type="text" value="Morgan" />
+                                    placeholder="Introduce tu apellido" type="text" wire:model="new_lastname" />
                             </div>
                             <!-- Field: Correo electrónico -->
                             <div class="space-y-2">
                                 <label class="font-label-mono text-label-mono text-on-surface-variant block">CORREO
                                     ELECTRÓNICO</label>
-                                <input
-                                    class="w-full bg-surface-container-low border-outline-variant rounded-xl px-4 py-3 focus:ring-2 focus:ring-secondary focus:border-transparent transition-soft font-body-base text-body-base"
-                                    placeholder="{{ $user->email }}" type="email" wire:model="new_email" />
+                                <p
+                                    class="w-full bg-surface-container-low border-outline-variant rounded-xl px-4 py-3 focus:ring-2 focus:ring-secondary focus:border-transparent transition-soft font-body-base text-body-base">
+                                    {{ $user->email }}</p>
                             </div>
                             <!-- Field: Teléfono -->
                             <div class="space-y-2">
@@ -77,37 +159,28 @@ new class extends Component {
                                     class="font-label-mono text-label-mono text-on-surface-variant block">TELÉFONO</label>
                                 <input
                                     class="w-full bg-surface-container-low border-outline-variant rounded-xl px-4 py-3 focus:ring-2 focus:ring-secondary focus:border-transparent transition-soft font-body-base text-body-base"
-                                    placeholder="+1 000 000 000" type="tel" value="+1 (555) 000-1234" />
+                                    placeholder="Introduce tu teléfono" type="tel" wire:model="new_phone" />
                             </div>
                         </div>
                     </div>
-                    <div class="pt-6 border-t border-outline-variant/10 flex justify-end">
+                    <div class="pt-6 border-t border-outline-variant/10 flex justify-end flex-col items-center gap-4">
                         <button
                             class="bg-primary text-on-primary font-bold rounded-full px-10 py-3 shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-soft"
-                            type="button">
+                            type="submit">
                             Guardar cambios
                         </button>
+                        @if (session()->has('message'))
+                            <p class="ml-4 text-sm text-success font-medium flex items-center gap-2">
+                                {{ session('message') }}
+                            </p>
+                        @endif
                     </div>
                 </form>
             </div>
         </div>
         <!-- Profile Insights (Bento Side) -->
         <div class="lg:col-span-4 space-y-6">
-            <!-- Status Card -->
-            <div
-                class="bg-secondary-container/30 rounded-3xl p-6 border border-secondary/10 relative overflow-hidden group">
-                <div class="relative z-10">
-                    <h3 class="font-label-mono text-label-mono text-secondary mb-4">ESTADO DE LA CUENTA</h3>
-                    <div class="flex items-center gap-3">
-                        <span class="w-3 h-3 bg-success-teal rounded-full animate-pulse"></span>
-                        <span class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Activa</span>
-                    </div>
-                    <p class="text-sm text-on-surface-variant mt-2">Nivel de seguridad: Enterprise</p>
-                </div>
-                <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-110 transition-soft">
-                    <span class="material-symbols-outlined text-6xl">verified_user</span>
-                </div>
-            </div>
+
             <!-- Details Card -->
             <div class="bg-surface-container-lowest rounded-3xl p-6 shadow-sm border border-outline-variant/20">
                 <h3 class="font-label-mono text-label-mono text-on-surface-variant mb-6">DETALLES DE ACCESO</h3>
@@ -115,33 +188,13 @@ new class extends Component {
                     <div class="flex justify-between items-center">
                         <div>
                             <p class="text-xs text-on-surface-variant">Fecha de registro</p>
-                            <p class="font-body-base text-body-base font-medium">12 Oct 2022</p>
+                            <p class="font-body-base text-body-base font-medium">{{ $user->created_at->format('d M Y') }}</p>
                         </div>
                         <span class="material-symbols-outlined text-on-surface-variant/50">calendar_today</span>
                     </div>
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <p class="text-xs text-on-surface-variant">Último acceso</p>
-                            <p class="font-body-base text-body-base font-medium">Hace 14 minutos</p>
-                        </div>
-                        <span class="material-symbols-outlined text-on-surface-variant/50">history</span>
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <p class="text-xs text-on-surface-variant">IP de sesión</p>
-                            <p class="font-body-base text-body-base font-medium">192.168.1.45</p>
-                        </div>
-                        <span class="material-symbols-outlined text-on-surface-variant/50">lan</span>
-                    </div>
                 </div>
             </div>
-            <!-- Decorative Micro-Animation Area -->
-            <div class="relative h-32 rounded-3xl overflow-hidden glass-card">
 
-                <div class="absolute inset-0 flex items-center justify-center">
-                    <p class="font-label-mono text-label-mono text-primary font-bold opacity-70">SYSTEM SECURE</p>
-                </div>
-            </div>
         </div>
     </div>
 </div>

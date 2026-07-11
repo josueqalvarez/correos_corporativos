@@ -55,6 +55,12 @@ new class extends Component {
         }
     }
 
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('home');
+    }
+
     public function mount()
     {
         $this->user = Auth::user();
@@ -72,12 +78,19 @@ new class extends Component {
 
             <!-- User Profile Mini -->
             <div class="flex items-center gap-3 px-4 mb-10 pt-4">
-                <div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container-highest">
-                    <img class="w-full h-full object-cover"
-                        data-alt="Professional headshot of a corporate tech administrator for MailCore Peru, dressed in a sleek charcoal suit with a friendly and confident expression. The background is a soft-focus high-tech office with minimalist white and deep navy tones, lit with clean clinical light."
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlzxauFP56St8f_poylwQDMOnLSrl5RREct3ssxtvETAblxnC4eTI95D7tNqhvdIP7yxOv-yYNzd2qInAhjG4h19vm7LG_ha4Nnohg5XC9MdEFuLkIg6CGE0YFX_QqGcieAhgqTn6fkkrEiMl_Y2X-Kr6LF-WDomozSBI_4e4oyqhrElu_V8-YgnX4BeyNmkYcnoacy7yGukcngmjkVcdceUi09bQKK6G2LwE8P9M8ZJ7pQ7zle7DRFQ" />
+                <div class="w-18 h-18 rounded-full overflow-hidden bg-surface-container-highest">
+                    @if ($this->user->image)
+                        <img class="w-full h-full object-cover"
+                            data-alt="Professional headshot of a corporate tech administrator for MailCore Peru, dressed in a sleek charcoal suit with a friendly and confident expression. The background is a soft-focus high-tech office with minimalist white and deep navy tones, lit with clean clinical light."
+                            src="{{ asset('storage/' . $this->user->image) }}" />
+                    @else
+                        <div
+                            class="w-full h-full flex items-center justify-center text-on-surface-container-highest font-bold text-lg">
+                            {{ strtoupper(substr($this->user->name, 0, 2)) }}
+                        </div>
+                    @endif
                 </div>
-                <span class="text-secondary-fixed font-bold text-sm">{{ $this->user->name }}</span>
+                <span class="text-secondary-fixed font-bold text-lg">{{ $this->user->name }}</span>
             </div>
             <!-- Navigation Links -->
             <nav class="flex-1 space-y-2">
@@ -97,7 +110,7 @@ new class extends Component {
 
 
                 <a class="flex items-center gap-3 px-4 py-3 text-on-tertiary-container hover:text-error transition-colors"
-                    href="{{ route('home') }}" wire:navigate>
+                    wire:click.prevent="logout" wire:navigate>
                     <span class="material-symbols-outlined" data-icon="logout">logout</span>
                     <span>Logout</span>
                 </a>

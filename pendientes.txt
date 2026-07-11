@@ -1,2 +1,4 @@
 middleware (creo)
 - Al crear comentario sin iniciar sesion, debe aparecer un popup de inicio de sesion, sino da error
+- Diferenciar la sesion iniciada entre un usuario y un admin, al ingresar al panel admin   
+- Al ingresar a paginas que tenia la sesion iniciada, no puedo.
