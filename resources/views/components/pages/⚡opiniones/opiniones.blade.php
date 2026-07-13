@@ -1,12 +1,3 @@
-<?php
-
-use Livewire\Component;
-
-new class extends Component {
-    //
-};
-?>
-
 <x-layouts.index>
     <!-- Hero Section -->
     <section class="relative h-100 flex items-center justify-center overflow-hidden bg-primary-container">

@@ -1,13 +1,3 @@
-<?php
-
-use Livewire\Component;
-use Livewire\Attributes\Layout;
-
-new class extends Component {
-    #[Layout('layouts.index')]
-};
-?>
-
 <div>
     <!-- Hero / Intro -->
     <section
