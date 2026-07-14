@@ -15,7 +15,7 @@ class CommentSection extends Component
     public $blog;
     public User $user;
     public array $content = [];
-    public ?int $validar_comentario = null;
+    public ?string $validar_comentario = null;
 
     // Methods ===========================
     public function delete(int $commentId)
@@ -26,7 +26,7 @@ class CommentSection extends Component
             $comment->delete();
         }
     }
-    public function save(?int $parentCommentId = null, ?int $comment_blog = 0)
+    public function save(?string $parentCommentId = null)
     {
 
         if (empty($this->content[$parentCommentId] ?? '')) {
@@ -41,7 +41,7 @@ class CommentSection extends Component
             'content' => $this->content[$parentCommentId],
             'user_id' => auth()->id(),
             'blog_id' => $this->blog->id, // Reemplaza con el ID del blog correspondiente
-            'parent_comment_id' => $comment_blog == 1 ? null : $parentCommentId,
+            'parent_comment_id' => $parentCommentId === 'blog' ? null : $parentCommentId,
             'created_at' => now(),
             'updated_at' => now(),
         ]);

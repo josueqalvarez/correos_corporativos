@@ -28,9 +28,9 @@
 
                             {{-- Escribir respuesta al comentario --}}
                             <div class="mt-4">
-                                @if ($validar_comentario !== $comment->id)
+                                @if ($validar_comentario !== (string) $comment->id)
                                     <a class="inline-flex cursor-pointer rounded-full px-3 py-1.5 text-sm font-medium text-on-surface-variant transition-colors hover:bg-surface-container-high"
-                                        wire:click.prevent="toggleReplyForm({{ $comment->id }})">
+                                        wire:click.prevent="toggleReplyForm('{{ $comment->id }}')">
                                         Responder
                                     </a>
                                 @else
@@ -42,12 +42,12 @@
                                         <div class="mt-3 flex flex-wrap gap-3">
                                             <button
                                                 class="rounded-full bg-primary px-4 py-2 font-bold text-on-primary transition-transform hover:scale-[1.01]"
-                                                wire:click.prevent='save({{ $comment->id }})'>
+                                                wire:click.prevent='save("{{ $comment->id }}")'>
                                                 Responder
                                             </button>
                                             <button
                                                 class="rounded-full bg-outline-variant/20 px-4 py-2 font-bold text-on-surface-variant transition-transform hover:scale-[1.01]"
-                                                wire:click.prevent="toggleReplyForm({{ $comment->id }})">
+                                                wire:click.prevent="toggleReplyForm('{{ $comment->id }}')">
                                                 Cancelar
                                             </button>
                                         </div>
@@ -106,9 +106,9 @@
             <div class="mt-4 flex flex-col gap-3 sm:flex-row">
                 <button
                     class="rounded-full bg-primary px-6 py-3 font-bold text-on-primary transition-transform hover:scale-[1.01] cursor-pointer"
-                    wire:click='save("blog", {{ $user ?? 1 }})'>
+                    wire:click='save("blog")'>
                     Comentar
-                </button>
+                </button>   
             </div>
         </div>
 
