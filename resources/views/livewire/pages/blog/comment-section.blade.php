@@ -97,16 +97,16 @@
             <label class="mb-2 block font-bold text-primary" for="blog-response">
                 Escribe un comentario al blog</label>
 
-                <textarea
+            <textarea
                 class="min-h-28 w-full rounded-2xl border border-outline-variant/30 bg-surface-container-lowest px-4 py-3 text-body-base outline-none ring-0 focus:border-secondary"
                 id="blog-response" placeholder="Escribe un comentario..." wire:model='content.blog'></textarea>
-                @error('content.blog')
-                    <p class="mt-1 text-sm text-error">{{ $message }}</p>
-                @enderror
+            @error('content.blog')
+                <p class="mt-1 text-sm text-error">{{ $message }}</p>
+            @enderror
             <div class="mt-4 flex flex-col gap-3 sm:flex-row">
                 <button
-                    class="rounded-full bg-primary px-6 py-3 font-bold text-on-primary transition-transform hover:scale-[1.01]"
-                    wire:click='save("blog")'>
+                    class="rounded-full bg-primary px-6 py-3 font-bold text-on-primary transition-transform hover:scale-[1.01] cursor-pointer"
+                    wire:click='save("blog", {{ $user ?? 1 }})'>
                     Comentar
                 </button>
             </div>

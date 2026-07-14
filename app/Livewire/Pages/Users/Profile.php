@@ -61,7 +61,7 @@ class Profile extends Component
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('home');
+        return redirect()->to(url()->current());
     }
 
     public function mount()

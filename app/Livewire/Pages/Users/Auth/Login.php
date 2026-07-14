@@ -34,7 +34,14 @@ class Login extends Component
         Auth::login($user);
         session()->regenerate();
 
-        return redirect()->route('profile');
+        return redirect()->intended(route('profile'));
+    }
+
+    public function mount()
+    {
+        if (url()->previous() !== route('crear-cuenta')) {
+            session()->put('url.intended', url()->previous());
+        }
     }
 
     public function render()

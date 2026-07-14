@@ -10,11 +10,14 @@ use App\Models\User;
 #[Layout('components.layouts.index')]
 class CommentSection extends Component
 {
+
+    // Variables ==========================
     public $blog;
     public User $user;
     public array $content = [];
     public ?int $validar_comentario = null;
 
+    // Methods ===========================
     public function delete(int $commentId)
     {
         $comment = Comment::find($commentId);
@@ -23,7 +26,7 @@ class CommentSection extends Component
             $comment->delete();
         }
     }
-    public function save(?string $parentCommentId = null)
+    public function save(?int $parentCommentId = null, ?int $comment_blog = 0)
     {
 
         if (empty($this->content[$parentCommentId] ?? '')) {
@@ -35,10 +38,10 @@ class CommentSection extends Component
         }
 
         Comment::create([
-            'content' => $this->content[$parentCommentId] ?? '',
+            'content' => $this->content[$parentCommentId],
             'user_id' => auth()->id(),
             'blog_id' => $this->blog->id, // Reemplaza con el ID del blog correspondiente
-            'parent_comment_id' => $parentCommentId,
+            'parent_comment_id' => $comment_blog == 1 ? null : $parentCommentId,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -56,6 +59,9 @@ class CommentSection extends Component
     public function mount($blog)
     {
         $this->blog = $blog;
+        if (auth()->check()) {
+            $this->user = auth()->user();
+        }
     }
 
     public function render()
