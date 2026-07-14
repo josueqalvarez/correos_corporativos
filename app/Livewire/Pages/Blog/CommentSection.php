@@ -1,11 +1,15 @@
 <?php
 
+namespace App\Livewire\Pages\Blog;
+
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use App\Models\Comment;
 use App\Models\User;
 
-new #[Layout('components.layouts.index')] class extends Component {
+#[Layout('components.layouts.index')]
+class CommentSection extends Component
+{
     public $blog;
     public User $user;
     public array $content = [];
@@ -19,8 +23,17 @@ new #[Layout('components.layouts.index')] class extends Component {
             $comment->delete();
         }
     }
-    public function save(?int $parentCommentId = null)
+    public function save(?string $parentCommentId = null)
     {
+
+        if (empty($this->content[$parentCommentId] ?? '')) {
+            $this->addError('content.' . $parentCommentId, 'El comentario no puede estar vacío.');    
+            return;
+        }
+        else if (auth()->guest()) {
+            return redirect()->route('login');
+        }
+
         Comment::create([
             'content' => $this->content[$parentCommentId] ?? '',
             'user_id' => auth()->id(),
@@ -35,7 +48,7 @@ new #[Layout('components.layouts.index')] class extends Component {
         $this->toggleReplyForm($parentCommentId);
     }
 
-    public function toggleReplyForm(?int $parentCommentId = null)
+    public function toggleReplyForm(?string $parentCommentId = null)
     {
         $this->validar_comentario = $this->validar_comentario === $parentCommentId ? null : $parentCommentId;
     }
@@ -43,6 +56,10 @@ new #[Layout('components.layouts.index')] class extends Component {
     public function mount($blog)
     {
         $this->blog = $blog;
-        $this->user = auth()->user();
     }
-};
+
+    public function render()
+    {
+        return view('livewire.pages.blog.comment-section');
+    }
+}

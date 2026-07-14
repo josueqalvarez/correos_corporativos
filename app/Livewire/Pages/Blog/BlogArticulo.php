@@ -1,10 +1,14 @@
 <?php
 
+namespace App\Livewire\Pages\Blog;
+
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use App\Models\Blog;
 
-new #[Layout('components.layouts.index')] class extends Component {
+#[Layout('components.layouts.index')]
+class BlogArticulo extends Component
+{
     
     
     public array $bd = [
@@ -27,4 +31,9 @@ new #[Layout('components.layouts.index')] class extends Component {
     {
         $this->blog_searched = Blog::where('slug', $this->slug)->firstOrFail();
     }
-};
+
+    public function render()
+    {
+        return view('livewire.pages.blog.blog-articulo');
+    }
+}

@@ -1,12 +1,16 @@
 <?php
 
+namespace App\Livewire\Pages\Users\Auth;
+
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
-new #[Layout('layouts.index')] class extends Component {
+#[Layout('layouts.index')]
+class Login extends Component
+{
     public string $email = '';
     public string $password = '';
 
@@ -32,4 +36,9 @@ new #[Layout('layouts.index')] class extends Component {
 
         return redirect()->route('profile');
     }
-};
+
+    public function render()
+    {
+        return view('livewire.pages.users.auth.login');
+    }
+}

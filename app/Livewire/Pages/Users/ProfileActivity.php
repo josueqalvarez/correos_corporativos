@@ -1,12 +1,16 @@
 <?php
 
+namespace App\Livewire\Pages\Users;
+
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use App\Models\User;
 use Livewire\WithPagination;
 use Livewire\WithoutUrlPagination;
 
-new #[Layout('layouts.index')] class extends Component {
+#[Layout('layouts.index')]
+class ProfileActivity extends Component
+{
     public ?User $user;
 
     use WithPagination;
@@ -17,4 +21,9 @@ new #[Layout('layouts.index')] class extends Component {
     {
         return $this->user->comments()->latest()->paginate($this->perPage);
     }
-};
+
+    public function render()
+    {
+        return view('livewire.pages.users.profile_activity');
+    }
+}

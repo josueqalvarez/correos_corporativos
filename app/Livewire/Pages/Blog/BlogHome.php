@@ -1,10 +1,14 @@
 <?php
 
+namespace App\Livewire\Pages\Blog;
+
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use App\Models\Blog;
 
-new #[Layout('components.layouts.index')] class extends Component {
+#[Layout('components.layouts.index')]
+class BlogHome extends Component
+{
     
     public $articulos;
 
@@ -31,4 +35,9 @@ new #[Layout('components.layouts.index')] class extends Component {
             'read_count' => '3.2k',
         ],
     ];
-};
+
+    public function render()
+    {
+        return view('livewire.pages.blog.blog-home');
+    }
+}

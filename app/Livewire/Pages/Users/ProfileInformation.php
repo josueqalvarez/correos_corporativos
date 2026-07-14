@@ -1,12 +1,16 @@
 <?php
 
+namespace App\Livewire\Pages\Users;
+
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use App\Models\User;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
 
-new #[Layout('layouts.index')] class extends Component {
+#[Layout('layouts.index')]
+class ProfileInformation extends Component
+{
     use WithFileUploads;
     public User $user;
 
@@ -65,4 +69,9 @@ new #[Layout('layouts.index')] class extends Component {
         $this->new_phone = $this->user->phone ? $this->user->phone : '';
         $this->path = $this->user->image ?? '';
     }
-};
+
+    public function render()
+    {
+        return view('livewire.pages.users.profile_information');
+    }
+}

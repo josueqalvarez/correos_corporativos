@@ -1,11 +1,15 @@
 <?php
 
+namespace App\Livewire\Pages\Users;
+
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use app\Models\User;
 use Illuminate\Support\Facades\Hash;
 
-new #[Layout('layouts.index')] class extends Component {
+#[Layout('layouts.index')]
+class ProfileSettings extends Component
+{
     public User $user;
 
     public function borrar_cuenta()
@@ -41,4 +45,9 @@ new #[Layout('layouts.index')] class extends Component {
         $this->reset(['current_password', 'new_password', 'new_password_confirmation']);
         session()->flash('success', 'Contraseña actualizada exitosamente.');
     }
-};
+
+    public function render()
+    {
+        return view('livewire.pages.users.profile_settings');
+    }
+}

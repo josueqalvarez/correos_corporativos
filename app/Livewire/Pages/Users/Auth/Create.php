@@ -1,9 +1,13 @@
 <?php
 
+namespace App\Livewire\Pages\Users\Auth;
+
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 
-new #[Layout('layouts.index')] class extends Component {
+#[Layout('layouts.index')]
+class Create extends Component
+{
 
     public string $fullname = '';
     public string $email = '';
@@ -32,4 +36,9 @@ new #[Layout('layouts.index')] class extends Component {
 
         return redirect()->route('home')->with('success', 'Cuenta creada exitosamente. ¡Bienvenido!');
     }
-};
+
+    public function render()
+    {
+        return view('livewire.pages.users.auth.create');
+    }
+}

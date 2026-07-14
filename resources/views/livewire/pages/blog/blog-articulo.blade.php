@@ -10,8 +10,6 @@
                     <div
                         class="flex items-center gap-2 mb-8 font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider max-w-[1600px]  mx-auto px-8 ">
                         <a class="hover:text-secondary transition-colors" href="#">Blog</a>
-                        <span class="material-symbols-outlined text-[14px]">chevron_right</span>
-                        <span class="text-on-surface">Zoho Mail</span>
                     </div>
                     <h1
                         class="font-headline-lg text-headline-xl md:text-display-xl-mobile lg:text-display-xl mb-6 text-primary leading-tight ">
@@ -27,11 +25,10 @@
                         </div> --}}
                         <div class="flex items-center gap-2">
                             <span class="material-symbols-outlined">calendar_today</span>
-                            <span>{{ $blog_searched['date'] }}</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <span class="material-symbols-outlined">schedule</span>
-                            <span>{{ $blog_searched['reading_time'] }} min de lectura</span>
+                            <span>
+                                {{ $blog_searched['updated_at'] == $blog_searched['created_at'] ? 'Creado: ' : 'Actualizado el ' }}
+                                {{ $blog_searched['updated_at']->format('d/m/Y') }}
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -40,7 +37,7 @@
             <div class="rounded-3xl overflow-hidden mb-12 shadow-2xl">
                 <img class="w-full h-auto aspect-video object-cover"
                     data-alt="A professional high-fidelity digital rendering of a sleek laptop displaying a clean Zoho Mail interface with a customized business domain email. The scene is set in a modern, brightly lit office environment with soft glassmorphism accents and a corporate navy and teal color palette. Soft ambient light illuminates the silver laptop while technical network diagrams float subtly in the blurred background, conveying a sense of advanced cloud infrastructure and reliability."
-                    src=" {{  asset('storage/' . $blog_searched['image']) }} " />
+                    src=" {{ asset('storage/' . $blog_searched['image']) }} " />
             </div>
             <!-- Content Intro -->
             <div class="prose prose-lg max-w-none text-on-surface-variant leading-relaxed">
@@ -66,7 +63,7 @@
                 <h2 class="font-headline-lg text-headline-lg text-primary mt-12 mb-6" id="spf">¿Qué es un registro
                     SPF y por qué lo necesitas?</h2>
                 <p class="mb-6">
-                    {{  $blog_searched['content'] }}
+                    {{ $blog_searched['content'] }}
                 </p>
                 <ul class="space-y-4 mb-8">
                     <li class="flex gap-3">
@@ -86,8 +83,7 @@
                     </li>
                 </ul>
                 <!-- Pro Tip Box -->
-                <div
-                    class=" border-l-4 border-success-teal p-8 rounded-r-3xl my-10 bg-mint-container">
+                <div class=" border-l-4 border-success-teal p-8 rounded-r-3xl my-10 bg-mint-container">
                     <div class="flex items-start gap-4">
                         <div class="p-2 bg-success-teal text-on-primary rounded-xl">
                             <span class="material-symbols-outlined">lightbulb</span>
@@ -223,11 +219,14 @@
             <!-- Newsletter / CTA Card -->
             <div class="bg-primary text-on-primary p-8 rounded-3xl relative overflow-hidden shadow-2xl">
                 <div class="relative z-10">
-                    <h4 class="font-headline-md text-headline-md mb-4">¿Prefieres que nosotros configuremos todo por ti?</h4>
-                    <p class="opacity-80 mb-6 text-body-base">Ahorra tiempo y evita errores técnicos. Servicio de configuración express disponible.</p>
+                    <h4 class="font-headline-md text-headline-md mb-4">¿Prefieres que nosotros configuremos todo por
+                        ti?</h4>
+                    <p class="opacity-80 mb-6 text-body-base">Ahorra tiempo y evita errores técnicos. Servicio de
+                        configuración express disponible.</p>
                     <button
                         class="w-full bg-secondary-fixed text-on-secondary-fixed py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-white transition-colors active:scale-95 duration-200">
-                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">phone_iphone</span>
+                        <span class="material-symbols-outlined"
+                            style="font-variation-settings: 'FILL' 1;">phone_iphone</span>
                         WhatsApp Corporativo
                     </button>
                 </div>

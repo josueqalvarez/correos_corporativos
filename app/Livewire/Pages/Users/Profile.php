@@ -1,27 +1,31 @@
 <?php
 
+namespace App\Livewire\Pages\Users;
+
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Url;
 use App\Models\User;
 
-new #[Layout('layouts.index')] class extends Component {
+#[Layout('layouts.index')]
+class Profile extends Component
+{
     public array $nav_options = [
         [
             'Title' => 'Activity',
             'Icon' => 'Analytics',
-            'Content' => 'pages.users.profile_activity',
+            'Content' => 'pages.users.profile-activity',
         ],
         [
             'Title' => 'Personal Data',
             'Icon' => 'Person',
-            'Content' => 'pages.users.profile_information',
+            'Content' => 'pages.users.profile-information',
         ],
         [
             'Title' => 'Settings',
             'Icon' => 'Settings',
-            'Content' => 'pages.users.profile_settings',
+            'Content' => 'pages.users.profile-settings',
         ],
     ];
 
@@ -65,4 +69,9 @@ new #[Layout('layouts.index')] class extends Component {
         $this->user = Auth::user();
         $this->cambiar_tab($this->tab);
     }
-};
+
+    public function render()
+    {
+        return view('livewire.pages.users.profile');
+    }
+}
