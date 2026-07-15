@@ -1,7 +1,7 @@
 <div>
     <!-- Hero / Intro -->
     <section
-        class="relative overflow-hidden py-section-padding px-margin-mobile md:px-gutter max-w-container-max mx-auto"
+        class="section-shell page-shell relative overflow-hidden"
         id="inicio">
         <div class="grid md:grid-cols-2 gap-stack-lg items-center">
             <div>
@@ -29,14 +29,14 @@
                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMpIqpIrzNL_jOg6SpgcIPGevIhB7K9Tr7q-RTE1wI2woOQ1o27hvaQRfOSYXvR0ejUroGDSqaaE-sbC82MZ3ZqI9Y5mjRVgpD9uRfNvQgrDU1WC1CYrqGzv-3SmPJyNl-ohHbgW3w44rw3ZIEGi9yZCoBKnU-eavSrlheSBeKO3Om7As9QekK00WFkfywjVrgWXw36CVCmfccJFkNNd0nJPcP33g6i33G1NcH5CnWq0HHQj8ClOLDKeQjJI8pl4w3_eikSZNsJ_56">
                 </div>
                 <div
-                    class="absolute -bottom-6 -right-6 w-64 h-64 bg-secondary-container rounded-full blur-[80px] opacity-30 z-0">
+                    class="absolute -bottom-6 -right-6 hidden h-64 w-64 rounded-full bg-secondary-container opacity-30 blur-[80px] z-0 sm:block">
                 </div>
             </div>
         </div>
     </section>
     <!-- Section: What is a Domain -->
     <section class="py-section-padding bg-surface-container-lowest" id="que-es-dominio">
-        <div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
+        <div class="page-shell">
             <div class="flex flex-col md:flex-row gap-12 items-center">
                 <div class="md:w-1/2">
                     <div class="inline-flex items-center gap-2 text-primary font-bold mb-4">
@@ -63,7 +63,7 @@
                             de tu nombre de marca en la web.</p>
                     </div>
                 </div>
-                <div class="md:w-1/2 grid grid-cols-2 gap-4">
+                <div class="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 md:w-1/2">
                     <div
                         class="bg-primary-container p-8 rounded-3xl text-white flex flex-col justify-between aspect-square">
                         <span class="material-symbols-outlined text-4xl">check_circle</span>
@@ -80,7 +80,7 @@
     </section>
     <!-- Section: What is Hosting Email -->
     <section class="py-section-padding" id="hosting">
-        <div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
+        <div class="page-shell">
             <div class="flex flex-col-reverse md:flex-row gap-12 items-center">
                 <div class="md:w-1/2">
 
@@ -121,7 +121,7 @@
     </section>
     <!-- Comparison Bento Grid -->
     <section class="py-section-padding bg-surface-bright" id="comparativa">
-        <div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
+        <div class="page-shell">
             <div class="text-center mb-16">
                 <h2 class="font-headline-lg text-headline-lg text-primary mb-4">Domain vs Hosting Email</h2>
                 <p class="text-on-surface-variant max-w-2xl mx-auto">Entiende la diferencia clave con esta analogía
@@ -222,7 +222,7 @@
     </section>
     <!-- FAQ Accordion -->
     <section class="py-section-padding bg-surface-container-low" id="faq">
-        <div class="max-w-3xl mx-auto px-margin-mobile md:px-gutter">
+        <div class="page-shell max-w-3xl">
             <h2 class="font-headline-lg text-headline-lg text-primary text-center mb-12">Preguntas Frecuentes</h2>
             <div class="space-y-4">
                 <div class="bg-white rounded-xl border border-outline-variant overflow-hidden">
@@ -265,7 +265,7 @@
         </div>
     </section>
     <!-- CTA Final -->
-    <section class="py-section-padding px-margin-mobile md:px-gutter max-w-container-max mx-auto text-center">
+    <section class="section-shell page-shell text-center">
         <div class="bg-primary text-white p-12 md:p-20 rounded-[40px] relative overflow-hidden">
             <div class="relative z-10 max-w-2xl mx-auto">
                 <h2 class="font-headline-xl text-headline-xl mb-6">¿Listo para dar el siguiente paso?</h2>
@@ -279,9 +279,9 @@
             </div>
             <!-- Background decoration -->
             <div
-                class="absolute top-0 right-0 w-64 h-64 bg-secondary-container/20 rounded-full -mr-20 -mt-20 blur-3xl">
+                class="absolute top-0 right-0 hidden h-64 w-64 rounded-full bg-secondary-container/20 blur-3xl -mr-20 -mt-20 sm:block">
             </div>
-            <div class="absolute bottom-0 left-0 w-64 h-64 bg-tertiary-fixed/10 rounded-full -ml-20 -mb-20 blur-3xl">
+            <div class="absolute bottom-0 left-0 hidden h-64 w-64 rounded-full bg-tertiary-fixed/10 blur-3xl -ml-20 -mb-20 sm:block">
             </div>
         </div>
     </section>

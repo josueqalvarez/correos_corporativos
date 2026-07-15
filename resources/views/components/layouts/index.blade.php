@@ -30,7 +30,7 @@
     {{-- Header > nav --}}
     <livewire:header />
 
-    <main class="pt-18">
+    <main class="pt-header-height">
 
         {{ $slot }}
 

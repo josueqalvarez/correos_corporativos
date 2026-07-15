@@ -1,5 +1,5 @@
 <!-- CONTENT CANVAS -->
-<div class="max-w-container-max mx-auto py-stack-lg">
+<div class="page-shell py-stack-lg">
     <!-- Page Header -->
     <div class="mb-stack-lg">
         <h2 class="font-headline-lg text-headline-lg text-on-surface">Datos personales</h2>
@@ -12,12 +12,12 @@
         <div class="lg:col-span-8">
             <div class="bg-surface-container-lowest rounded-3xl p-8 shadow-sm border border-outline-variant/20">
                 <form class="space-y-6" wire:submit.prevent="actualizar_datos">
-                    <div class="flex gap-6">
+                    <div class="flex flex-col gap-8 lg:flex-row">
                         {{-- Imagen de perfil --}}
-                        <div class="flex flex-col items-center gap-4 w-64">
+                        <div class="flex w-full flex-col items-center gap-4 lg:w-64">
                             {{-- Renderizado de foto de perfil o iniciales del nombre --}}
                             <div
-                                class="flex h-48 w-48 shrink-0 items-center justify-center rounded-full bg-primary text-lg font-bold text-on-primary">
+                                class="flex h-36 w-36 shrink-0 items-center justify-center rounded-full bg-primary text-lg font-bold text-on-primary sm:h-44 sm:w-44 lg:h-48 lg:w-48">
                                 @if ($profile_photo && $profile_photo->isPreviewable())
                                     <img src="{{ $profile_photo->temporaryUrl() }}" alt="Profile Picture"
                                         class="h-full w-full rounded-full object-cover" />
@@ -30,7 +30,7 @@
                             </div>
 
                             {{-- Botones de interaccion con la foto de perfil --}}
-                            <div class="flex flex-col gap-2">
+                            <div class="flex w-full flex-col gap-2 sm:w-auto">
 
                                 <input class="hidden" type="file" id="profile_photo" wire:model="profile_photo"
                                     accept=".jpg,.jpeg,.png,.webp,.gif" />
@@ -40,7 +40,7 @@
                                     {{ $user->image || $profile_photo ? 'Cambiar foto' : 'Subir foto' }}
                                 </button>
                                 @error('profile_photo')
-                                    <p class="text-sm text-error max-w-64">{{ $message }}</p>
+                                    <p class="max-w-full text-center text-sm text-error sm:max-w-64 lg:text-left">{{ $message }}</p>
                                 @enderror
                                 @if ($profile_photo)
                                     <button
@@ -57,7 +57,7 @@
                             </div>
                         </div>
                         {{-- Informacion personal --}}
-                        <div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="flex-1 grid grid-cols-1 gap-6 md:grid-cols-2">
                             <!-- Field: Nombre -->
                             <div class="space-y-2">
                                 <label
@@ -92,14 +92,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="pt-6 border-t border-outline-variant/10 flex justify-end flex-col items-center gap-4">
+                    <div class="flex flex-col items-center justify-end gap-4 border-t border-outline-variant/10 pt-6 sm:flex-row sm:justify-between">
                         <button
-                            class="bg-primary text-on-primary font-bold rounded-full px-10 py-3 shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-soft"
+                            class="w-full rounded-full bg-primary px-10 py-3 font-bold text-on-primary shadow-lg transition-soft hover:scale-[1.02] hover:shadow-xl active:scale-[0.98] sm:w-auto"
                             type="submit">
                             Guardar cambios
                         </button>
                         @if (session()->has('message'))
-                            <p class="ml-4 text-sm text-success font-medium flex items-center gap-2">
+                            <p class="flex items-center gap-2 text-center text-sm font-medium text-success sm:ml-4 sm:text-left">
                                 {{ session('message') }}
                             </p>
                         @endif

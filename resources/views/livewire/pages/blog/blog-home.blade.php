@@ -4,7 +4,7 @@
         <div class="absolute inset-0 z-0 opacity-20 pointer-events-none">
 
         </div>
-        <div class="max-w-container-max mx-auto px-8 md:px-32 relative z-10 flex flex-col items-center text-center">
+        <div class="page-shell relative z-10 flex flex-col items-center text-center">
             <div
                 class="inline-flex items-center gap-2 px-3 py-1 bg-mint-container/30 text-on-mint-container rounded-full mb-8">
                 <span class="font-label-mono text-label-mono uppercase tracking-wider">Centro de Conocimiento</span>
@@ -16,7 +16,7 @@
                 Aprende a dominar las mejores herramientas de comunicación empresarial. Guías expertas sobre Zoho Mail,
                 Google Workspace y optimización de infraestructura DNS.
             </p>
-            <div class="flex flex-row gap-4 items-center w-full max-w-lg mb-12">
+            <div class="mb-12 flex w-full max-w-lg flex-col items-stretch gap-4 sm:flex-row sm:items-center">
                 <div class="relative w-full ">
                     <span
                         class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
@@ -34,8 +34,8 @@
         <livewire:blog-buscador :search_query="$search_query" />
     @else
         <section class="py-section-padding bg-surface-container-low/50">
-            <div class="max-w-container-max mx-auto px-8 md:px-32">
-                <div class="flex justify-between items-end mb-12">
+            <div class="page-shell">
+                <div class="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
                     <div>
                         <h2 class="font-headline-lg text-headline-lg mb-2">Artículos destacados</h2>
                         <p class="text-on-surface-variant">Seleccionados cuidadosamente por nuestros expertos técnicos.
@@ -85,13 +85,13 @@
         </section>
         <!-- Main Content Area -->
         <section class="py-section-padding">
-            <div class="max-w-container-max mx-auto px-8 md:px-32 grid grid-cols-1 lg:grid-cols-12 gap-16">
+            <div class="page-shell grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
                 <!-- Latest Articles -->
                 <div class="lg:col-span-8">
                     <h2 class="font-headline-lg text-headline-lg mb-10">Últimos artículos</h2>
                     <div class="space-y-12">
                         @foreach ($articulos as $item)
-                            <article class="group grid md:grid-cols-3 gap-8">
+                            <article class="group grid gap-6 md:grid-cols-3 md:gap-8">
                                 <div
                                     class="md:col-span-1 h-48 rounded-2xl overflow-hidden border border-outline-variant/30">
                                     <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
@@ -159,9 +159,9 @@
             </div>
         </section>
         <!-- CTA Section -->
-        <section class="max-w-container-max mx-auto px-8 md:px-32 mb-section-padding">
+        <section class="page-shell mb-section-padding">
             <div
-                class="bg-mint-container p-12 md:p-20 rounded-[3rem] relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-12">
+            class="relative flex flex-col items-start justify-between gap-8 overflow-hidden rounded-[2rem] bg-mint-container p-6 sm:p-8 md:flex-row md:items-center md:gap-12 md:p-16">
                 <div
                     class="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-96 h-96 bg-secondary/10 rounded-full blur-3xl">
                 </div>
@@ -172,7 +172,7 @@
                         están
                         listos para asistirte en la implementación de tu infraestructura empresarial.</p>
                     <button
-                        class="bg-primary text-on-primary px-8 py-4 rounded-full font-bold flex items-center gap-3 hover:bg-zinc-800 transition-colors shadow-xl">
+                        class="flex w-full items-center justify-center gap-3 rounded-full bg-primary px-8 py-4 font-bold text-on-primary shadow-xl transition-colors hover:bg-zinc-800 sm:w-auto">
                         <span class="material-symbols-outlined" data-weight="fill">chat</span>
                         Hablar por WhatsApp
                     </button>

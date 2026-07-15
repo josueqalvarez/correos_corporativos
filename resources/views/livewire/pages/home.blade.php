@@ -15,7 +15,7 @@
                     Configuramos tu correo corporativo con Zoho Mail, Gmail o Outlook para que transmitas confianza y
                     seguridad en todo el Perú.
                 </p>
-                <div class="grid grid-cols-2 gap-4 mb-10">
+                <div class="mb-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div class="flex items-center gap-2">
                         <span class="material-symbols-outlined text-secondary"
                             style="font-variation-settings: 'FILL' 1;">check_circle</span>
@@ -37,14 +37,14 @@
                         <span class="font-medium">Todo el Perú</span>
                     </div>
                 </div>
-                <div class="flex flex-col sm:flex-row gap-4">
+                <div class="flex flex-col gap-4 sm:flex-row">
                     <button
-                        class="bg-secondary text-on-secondary px-8 py-4 rounded-xl font-subheading flex items-center justify-center gap-2 shadow-lg shadow-secondary/20 hover:opacity-90 transition-all">
+                        class="flex w-full items-center justify-center gap-2 rounded-xl bg-secondary px-8 py-4 font-subheading text-on-secondary shadow-lg shadow-secondary/20 transition-all hover:opacity-90 sm:w-auto">
                         <span class="material-symbols-outlined">call</span>
                         Agendar llamada por WhatsApp
                     </button>
                     <button
-                        class="border border-outline-variant text-on-surface px-8 py-4 rounded-xl font-subheading hover:bg-surface-container transition-colors">
+                        class="w-full rounded-xl border border-outline-variant px-8 py-4 font-subheading text-on-surface transition-colors hover:bg-surface-container sm:w-auto">
                         Ver precio
                     </button>
                 </div>

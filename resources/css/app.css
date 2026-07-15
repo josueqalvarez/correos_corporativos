@@ -10,6 +10,10 @@
 
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-display-xl: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-subheading: Inter, ui-sans-serif, system-ui, sans-serif;
+    --font-body-base: Inter, ui-sans-serif, system-ui, sans-serif;
+    --font-label-mono: 'IBM Plex Mono', 'SFMono-Regular', ui-monospace, monospace;
 
     --font-headline-md: Inter, ui-sans-serif, system-ui, sans-serif;
     --font-body-md: Inter, ui-sans-serif, system-ui, sans-serif;
@@ -46,17 +50,44 @@
     --text-headline-xl--letter-spacing: -0.02em;
     --text-headline-xl--font-weight: 700;
 
+    --text-display-xl: clamp(2.75rem, 5vw, 4.75rem);
+    --text-display-xl--line-height: 1;
+    --text-display-xl--letter-spacing: -0.03em;
+    --text-display-xl--font-weight: 800;
+
+    --text-display-xl-mobile: clamp(2rem, 8vw, 3rem);
+    --text-display-xl-mobile--line-height: 1.05;
+    --text-display-xl-mobile--letter-spacing: -0.03em;
+    --text-display-xl-mobile--font-weight: 800;
+
+    --text-subheading: 1.125rem;
+    --text-subheading--line-height: 1.75rem;
+    --text-subheading--font-weight: 500;
+
+    --text-body-base: 1rem;
+    --text-body-base--line-height: 1.625rem;
+    --text-body-base--font-weight: 400;
+
+    --text-label-mono: 0.75rem;
+    --text-label-mono--line-height: 1.125rem;
+    --text-label-mono--letter-spacing: 0.08em;
+    --text-label-mono--font-weight: 600;
+
     --text-headline-lg-mobile: 24px;
     --text-headline-lg-mobile--line-height: 32px;
     --text-headline-lg-mobile--font-weight: 600;
 
+    --spacing-header-height: 4.5rem;
     --spacing-margin-mobile: 16px;
+    --spacing-margin-x: clamp(1rem, 4vw, 2rem);
     --spacing-section-padding: 80px;
+    --spacing-section-padding-mobile: 56px;
     --spacing-stack-sm: 8px;
     --spacing-stack-lg: 32px;
     --spacing-gutter: 24px;
     --spacing-container-max: 1200px;
     --spacing-stack-md: 16px;
+    --spacing-touch-target: 44px;
 
     --radius-default: 0.25rem;
     --radius-lg: 0.5rem;
@@ -143,12 +174,39 @@
 
 @layer base {
 
+    html {
+        overflow-x: hidden;
+    }
+
+    body {
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+
     *,
     ::after,
     ::before,
     ::backdrop,
     ::file-selector-button {
         border-color: var(--color-gray-200, currentColor);
+    }
+
+    img {
+        display: block;
+        max-width: 100%;
+    }
+
+    button,
+    [type='button'],
+    [type='submit'],
+    [type='reset'],
+    input[type='button'],
+    input[type='submit'],
+    summary,
+    [role='button'],
+    .fi-btn,
+    .flux-button {
+        cursor: pointer;
     }
 
     h1,
@@ -159,6 +217,12 @@
     h6 {
         font-size: revert;
         font-weight: revert;
+    }
+
+    @media (max-width: 767px) {
+        section {
+            scroll-margin-top: calc(var(--spacing-header-height) + 1rem);
+        }
     }
 }
 
@@ -202,6 +266,68 @@
 
     .accordion-item.active {
         background-color: #f7fafc;
+    }
+
+    .transition-soft {
+        transition: all 220ms ease;
+    }
+
+    .hover-lift {
+        transition: transform 220ms ease, box-shadow 220ms ease;
+    }
+
+    .hover-lift:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 18px 40px rgba(13, 28, 50, 0.12);
+    }
+
+    .contact-card-shadow {
+        box-shadow: 0 18px 40px rgba(13, 28, 50, 0.08);
+    }
+
+    .mobile-scroll-x {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .surface-panel {
+        border: 1px solid color-mix(in srgb, var(--color-outline-variant) 28%, transparent);
+        background: color-mix(in srgb, white 88%, var(--color-surface-container-low));
+        box-shadow: 0 14px 32px rgba(13, 28, 50, 0.06);
+    }
+
+    .page-shell {
+        width: 100%;
+        max-width: var(--spacing-container-max);
+        margin-inline: auto;
+        padding-inline: var(--spacing-margin-x);
+    }
+
+    .page-shell-wide {
+        width: 100%;
+        max-width: 1600px;
+        margin-inline: auto;
+        padding-inline: var(--spacing-margin-x);
+    }
+
+    .section-shell {
+        padding-block: var(--spacing-section-padding);
+    }
+
+    @media (max-width: 767px) {
+        .bento-grid {
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        .page-shell,
+        .page-shell-wide {
+            padding-inline: var(--spacing-margin-mobile);
+        }
+
+        .section-shell {
+            padding-block: var(--spacing-section-padding-mobile);
+        }
     }
 }
 

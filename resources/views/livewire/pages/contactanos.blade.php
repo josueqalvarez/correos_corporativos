@@ -1,7 +1,7 @@
 <div>
 
     <section
-        class="relative overflow-hidden py-section-padding px-margin-mobile md:px-gutter max-w-container-max mx-auto"
+        class="section-shell page-shell relative overflow-hidden"
         id="inicio">
         <div class="text-center mb-stack-lg max-w-3xl mx-auto">
             <h1 class="font-headline-xl text-headline-xl text-primary mb-stack-sm md:text-headline-xl">Contáctanos</h1>
@@ -18,7 +18,7 @@
                     <p class="font-body-md text-body-md text-on-surface-variant mb-stack-md">La forma más rápida de
                         obtener
                         asistencia técnica directa con nuestros expertos.</p>
-                    <a class="flex items-center justify-center gap-3 w-full bg-secondary text-white py-4 rounded-lg font-bold text-lg shadow-sm hover:opacity-90 active:scale-95 transition-all"
+                    <a class="flex min-h-touch-target w-full items-center justify-center gap-3 rounded-lg bg-secondary py-4 text-lg font-bold text-white shadow-sm transition-all hover:opacity-90 active:scale-95"
                         href="https://wa.me/1234567890">
                         <span class="material-symbols-outlined text-2xl"
                             style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
@@ -115,7 +115,7 @@
                     </div>
                     <div class="pt-2">
                         <button
-                            class="w-full md:w-auto px-12 py-4 bg-primary text-on-primary rounded-lg font-bold text-lg hover:opacity-90 active:scale-95 transition-all flex items-center justify-center gap-2"
+                            class="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-6 py-4 text-lg font-bold text-on-primary transition-all hover:opacity-90 active:scale-95 sm:px-8 md:w-auto md:px-12"
                             type="submit">
                             Enviar mensaje
                             <span class="material-symbols-outlined">send</span>

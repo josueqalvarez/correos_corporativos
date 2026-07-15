@@ -24,13 +24,16 @@ new class extends Component {
 };
 ?>
 
-<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 sm:gap-4">
     @auth
         <div class="relative">
             <button type="button"
-                class="flex items-center gap-2 rounded-lg px-3 py-2 font-label-sm text-label-sm text-white transition-colors hover:bg-white/10"
+                class="flex min-h-touch-target items-center gap-2 rounded-xl px-2.5 py-2 text-white transition-colors hover:bg-white/10 sm:px-3 font-label-sm text-label-sm"
                 wire:click="toggleMenu">
-                <span>¡Hola, {{ auth()->user()->name }}!</span>
+                <span class="hidden sm:inline">¡Hola, {{ auth()->user()->name }}!</span>
+                <span class="inline-flex size-8 items-center justify-center rounded-full bg-white/12 text-xs font-bold sm:hidden">
+                    {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                </span>
                 <svg class="h-4 w-4 transition-transform {{ $isMenuOpen ? 'rotate-180' : '' }}" viewBox="0 0 20 20"
                     fill="currentColor" aria-hidden="true">
                     <path fill-rule="evenodd"
@@ -41,7 +44,7 @@ new class extends Component {
 
             @if ($isMenuOpen)
                 <div
-                    class="absolute right-0 mt-2 w-48 rounded-xl border border-outline-variant/20 bg-surface-container-low p-2 shadow-lg">
+                    class="absolute right-0 mt-2 w-56 max-w-[calc(100vw-2rem)] rounded-xl border border-outline-variant/20 bg-surface-container-low p-2 shadow-lg">
                     <a class="block rounded-lg px-3 py-2 font-label-sm text-label-sm text-on-surface hover:bg-surface-container-high"
                         href="{{ route('profile') }}" wire:navigate>
                         Perfil
@@ -56,7 +59,7 @@ new class extends Component {
             @endif
         </div>
     @else
-        <a class="bg-secondary text-on-secondary px-6 py-2 rounded-lg font-bold hover:scale-95 duration-150 transition-all font-label-sm text-label-sm"
+        <a class="bg-secondary text-on-secondary px-4 sm:px-6 py-2.5 rounded-lg font-bold hover:scale-95 duration-150 transition-all font-label-sm text-label-sm whitespace-nowrap"
             href="{{ route('login') }}">
             Iniciar sesión
         </a>

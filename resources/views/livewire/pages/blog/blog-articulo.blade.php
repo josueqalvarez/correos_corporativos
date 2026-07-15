@@ -1,14 +1,14 @@
 <div>
     <!-- Breadcrumbs -->
     <div
-        class="grid grid-cols-1 lg:grid-cols-12 gap-stack-lg items-start max-w-[1600px] py-section-padding mx-auto px-8 md:px-32 pt-">
+        class="page-shell-wide grid grid-cols-1 items-start gap-8 py-section-padding lg:grid-cols-12 lg:gap-stack-lg">
         <!-- Article Body (Center/Left) -->
         <article class="lg:col-span-8">
             <!-- Header -->
             <x.header>
                 <div class="mb-12">
                     <div
-                        class="flex items-center gap-2 mb-8 font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider max-w-[1600px]  mx-auto px-8 ">
+                        class="mb-8 flex items-center gap-2 font-label-mono text-label-mono uppercase tracking-wider text-on-surface-variant">
                         <a class="hover:text-secondary transition-colors" href="#">Blog</a>
                     </div>
                     <h1
@@ -103,7 +103,7 @@
                 <p class="mb-6">Zoho ofrece opciones que se adaptan desde freelancers hasta corporaciones
                     transnacionales. Aquí nuestra comparativa rápida:</p>
                 <!-- Comparative Table -->
-                <div class="overflow-x-auto mb-12 rounded-2xl border border-outline-variant/30 shadow-sm">
+                <div class="mobile-scroll-x mb-12 rounded-2xl border border-outline-variant/30 shadow-sm">
                     <table class="w-full text-left border-collapse bg-surface-container-lowest">
                         <thead>
                             <tr class="bg-primary text-on-primary">
@@ -148,7 +148,7 @@
                         <details
                             class="group bg-surface-container-lowest rounded-2xl border border-outline-variant/20 overflow-hidden"
                             open="">
-                            <summary class="flex justify-between items-center p-6 cursor-pointer list-none">
+                            <summary class="flex cursor-pointer list-none items-center justify-between p-5 md:p-6">
                                 <span class="font-bold text-primary">¿Cuánto tiempo tarda en propagarse el DNS?</span>
                                 <span
                                     class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
@@ -160,7 +160,7 @@
                         </details>
                         <details
                             class="group bg-surface-container-lowest rounded-2xl border border-outline-variant/20 overflow-hidden">
-                            <summary class="flex justify-between items-center p-6 cursor-pointer list-none">
+                            <summary class="flex cursor-pointer list-none items-center justify-between p-5 md:p-6">
                                 <span class="font-bold text-primary">¿Puedo migrar mis correos antiguos de Gmail?</span>
                                 <span
                                     class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
@@ -179,7 +179,7 @@
             </div>
         </article>
         <!-- Sidebar -->
-        <aside class="lg:col-span-4 sticky top-23 space-y-8">
+        <aside class="space-y-8 lg:col-span-4 lg:sticky lg:top-23">
             <!-- Related Posts -->
             <div class="bg-surface-container-lowest p-8 rounded-3xl border border-outline-variant/20">
                 <h4 class="font-bold text-primary mb-6">Artículos relacionados</h4>

@@ -23,7 +23,35 @@
         </div>
         <!-- Tabla de comentarios -->
         <div class="bg-white rounded-4xl shadow-sm overflow-hidden border border-outline-variant/20">
-            <div class="overflow-x-auto">
+            <div class="space-y-4 p-4 md:hidden">
+                @foreach ($this->registros() as $comment)
+                    <article class="rounded-3xl border border-outline-variant/20 bg-surface-container-lowest p-4">
+                        <div class="mb-3 flex items-start justify-between gap-3">
+                            <div>
+                                <p class="text-xs uppercase tracking-wide text-on-surface-variant">Comentario</p>
+                                <p class="mt-1 text-sm italic text-primary">{{ $comment->content }}</p>
+                            </div>
+                            @if ($comment->parent_comment_id)
+                                <span class="rounded-full bg-secondary/10 px-2 py-1 text-[11px] font-medium text-secondary">Otro comentario</span>
+                            @else
+                                <span class="rounded-full bg-primary/10 px-2 py-1 text-[11px] font-medium text-primary">Blog</span>
+                            @endif
+                        </div>
+
+                        <div class="space-y-2 text-sm text-on-surface-variant">
+                            <p><span class="font-semibold text-on-surface">Artículo:</span> {{ $comment->blog->title }}</p>
+                            <p><span class="font-semibold text-on-surface">Fecha:</span> {{ $comment->created_at->format('d M, Y • H:i') }}</p>
+                        </div>
+
+                        <a class="mt-4 inline-flex items-center gap-1 text-sm font-bold text-secondary hover:underline"
+                            href="{{ route('blog-articulo', $comment->blog->slug) }}" wire:navigate>
+                            Ver en el blog <span class="material-symbols-outlined text-xs" data-icon="open_in_new">open_in_new</span>
+                        </a>
+                    </article>
+                @endforeach
+            </div>
+
+            <div class="hidden overflow-x-auto md:block">
                 <table class="w-full text-left border-collapse">
                     {{-- Columnas --}}
                     <thead>
@@ -79,9 +107,9 @@
             </div>
             <!-- Pagination -->
             @if ($this->registros()->hasPages())
-                <div class="px-8 py-6 bg-surface-container-low flex justify-between items-center">
+                <div class="flex flex-col gap-4 bg-surface-container-low px-4 py-5 md:flex-row md:items-center md:justify-between md:px-8 md:py-6">
                     <span class="text-sm text-on-surface-variant">Mostrando {{ $this->registros()->firstItem() }} - {{ $this->registros()->lastItem() }} de {{ $this->registros()->total() }} comentarios</span>
-                    <div class="flex gap-2">
+                    <div class="mobile-scroll-x flex gap-2">
                         <button
                             class="w-10 h-10 flex items-center justify-center rounded-xl border border-outline-variant/30 text-on-surface hover:bg-white transition-colors"
                             wire:click="previousPage" @disabled($this->registros()->onFirstPage())>
