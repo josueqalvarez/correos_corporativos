@@ -4,6 +4,7 @@ namespace App\Livewire\Pages\Users;
 
 use Livewire\Component;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Computed;
 use App\Models\User;
 use Livewire\WithPagination;
 use Livewire\WithoutUrlPagination;
@@ -17,12 +18,12 @@ class ProfileActivity extends Component
 
     public int $perPage = 2;
     #[Computed] 
-    public function registros()
+    public function registros(): \Illuminate\Pagination\LengthAwarePaginator
     {
         return $this->user->comments()->latest()->paginate($this->perPage);
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('livewire.pages.users.profile_activity');
     }

@@ -11,6 +11,7 @@ class BlogArticulo extends Component
 {
     
     
+    /** @var array<int, array<string, mixed>> */
     public array $bd = [
         [
             'title' => 'Guía completa para configurar Zoho Mail con tu dominio propio',
@@ -23,16 +24,16 @@ class BlogArticulo extends Component
         ],
     ];
 
-    public $blog_searched;
+    public ?Blog $blog_searched = null;
     
     public string $slug;
 
-    public function mount(string $slug)
+    public function mount(string $slug): void
     {
         $this->blog_searched = Blog::where('slug', $this->slug)->firstOrFail();
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('livewire.pages.blog.blog-articulo');
     }

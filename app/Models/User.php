@@ -58,11 +58,13 @@ class User extends Authenticatable
             : $initials;
     }
 
-    public function blogs()
+    /** @return HasMany<Blog, User> */
+    public function blogs(): HasMany
     {
         return $this->hasMany(Blog::class);
     }
 
+    /** @return HasMany<Comment, User> */
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);

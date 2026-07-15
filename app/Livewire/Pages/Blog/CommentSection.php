@@ -4,6 +4,7 @@ namespace App\Livewire\Pages\Blog;
 
 use Livewire\Component;
 use Livewire\Attributes\Layout;
+use App\Models\Blog;
 use App\Models\Comment;
 use App\Models\User;
 
@@ -12,14 +13,15 @@ class CommentSection extends Component
 {
 
     // Variables ==========================
-    public $blog;
+    public Blog $blog;
     public User $user;
+    /** @var array<string, string> */
     public array $content = [];
     public ?string $validar_comentario = null;
     public ?string $editar = null;
 
     // Methods ===========================
-    public function delete(int $commentId)
+    public function delete(int $commentId): void
     {
         $comment = Comment::find($commentId);
 
@@ -28,7 +30,7 @@ class CommentSection extends Component
         }
     }
 
-    public function edit(string $replyId)
+    public function edit(string $replyId): void
     {
         $this->editar = $this->editar === $replyId ? null : $replyId;
 
@@ -36,7 +38,7 @@ class CommentSection extends Component
         $this->content[$replyId] = $reply->content;
     }
 
-    public function save(?string $parentCommentId = null)
+    public function save(?string $parentCommentId = null): ?\Illuminate\Http\RedirectResponse
     {
 
         if (empty($this->content[$parentCommentId] ?? '')) {
@@ -60,7 +62,7 @@ class CommentSection extends Component
         $this->toggleReplyForm($parentCommentId);
     }
 
-    public function actualizar(string $replyId)
+    public function actualizar(string $replyId): void
     {
         if (empty($this->content[$replyId] ?? '')) {
             $this->addError('content.' . $replyId, 'El comentario no puede estar vacío.');
@@ -77,12 +79,12 @@ class CommentSection extends Component
         $this->editar = null;
     }
 
-    public function toggleReplyForm(?string $parentCommentId = null)
+    public function toggleReplyForm(?string $parentCommentId = null): void
     {
         $this->validar_comentario = $this->validar_comentario === $parentCommentId ? null : $parentCommentId;
     }
 
-    public function mount($blog)
+    public function mount(Blog $blog): void
     {
         $this->blog = $blog;
         if (auth()->check()) {
@@ -90,7 +92,7 @@ class CommentSection extends Component
         }
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('livewire.pages.blog.comment-section');
     }

@@ -16,7 +16,7 @@ class Login extends Component
     public bool $passwordVisible = false;
     public bool $remember = false;
 
-    public function login()
+    public function login(): ?\Illuminate\Http\RedirectResponse
     {
 
         $user = User::where('email', $this->email)->first();
@@ -39,14 +39,14 @@ class Login extends Component
 
     }
 
-    public function mount()
+    public function mount(): void
     {
         if (url()->previous() !== route('crear-cuenta')) {
             session()->put('url.intended', url()->previous());
         }
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('livewire.pages.users.auth.login');
     }

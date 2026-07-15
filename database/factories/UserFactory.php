@@ -46,5 +46,14 @@ class UserFactory extends Factory
     /**
      * Indicate that the model has two-factor authentication configured.
      */
-    public function withTwoFactor(): static {}
+    public function withTwoFactor(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'two_factor_secret' => encrypt(fake()->sha256()),
+            'two_factor_recovery_codes' => encrypt(json_encode(
+                collect(range(1, 8))->map(fn () => fake()->regexify('[a-z0-9]{10}'))->all()
+            )),
+            'two_factor_confirmed_at' => now(),
+        ]);
+    }
 }
