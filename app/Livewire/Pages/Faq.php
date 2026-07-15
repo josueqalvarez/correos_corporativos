@@ -10,7 +10,7 @@ class Faq extends Component
 {
 
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('livewire.pages.faq');
     }

@@ -4,7 +4,7 @@ namespace App\Livewire\Pages\Users;
 
 use Livewire\Component;
 use Livewire\Attributes\Layout;
-use app\Models\User;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 #[Layout('layouts.index')]
@@ -12,7 +12,7 @@ class ProfileSettings extends Component
 {
     public User $user;
 
-    public function borrar_cuenta()
+    public function borrar_cuenta(): void
     {
         User::where('id', $this->user->id)->delete();
 
@@ -23,7 +23,7 @@ class ProfileSettings extends Component
     public string $new_password = '';
     public string $new_password_confirmation = '';
 
-    public function update_password()
+    public function update_password(): void
     {
         
         $this->validate([
@@ -46,7 +46,7 @@ class ProfileSettings extends Component
         session()->flash('success', 'Contraseña actualizada exitosamente.');
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('livewire.pages.users.profile_settings');
     }

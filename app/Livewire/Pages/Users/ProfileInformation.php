@@ -18,10 +18,10 @@ class ProfileInformation extends Component
     public string $new_lastname = '';
     public string $new_phone = '';
 
-    public $profile_photo = null; // Se guarda la foto de perfil temporalmente antes de subirla al servidor
+    public mixed $profile_photo = null; // Se guarda la foto de perfil temporalmente antes de subirla al servidor
     public string $path = ''; // Se guarda la ruta de la foto de perfil en el servidor después de subirla
 
-    public function actualizar_datos()
+    public function actualizar_datos(): void
     {
         $this->validate([
             'new_name' => 'nullable|string|max:255',
@@ -62,7 +62,7 @@ class ProfileInformation extends Component
         }
     }
 
-    public function mount()
+    public function mount(): void
     {
         $this->new_name = $this->user->name;
         $this->new_lastname = $this->user->lastname ? $this->user->lastname : '';
@@ -70,7 +70,7 @@ class ProfileInformation extends Component
         $this->path = $this->user->image ?? '';
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('livewire.pages.users.profile_information');
     }

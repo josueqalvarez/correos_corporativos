@@ -11,6 +11,7 @@ use App\Models\User;
 #[Layout('layouts.index')]
 class Profile extends Component
 {
+    /** @var array<int, array<string, string>> */
     public array $nav_options = [
         [
             'Title' => 'Activity',
@@ -40,7 +41,7 @@ class Profile extends Component
     public string $actual_content = '';
     public string $actual_option = '';
 
-    public function cambiar_tab($tab)
+    public function cambiar_tab(string $tab): void
     {
         $this->tab = $tab;
 
@@ -58,19 +59,19 @@ class Profile extends Component
         }
     }
 
-    public function logout()
+    public function logout(): \Illuminate\Http\RedirectResponse
     {
         Auth::logout();
         return redirect()->to(url()->current());
     }
 
-    public function mount()
+    public function mount(): void
     {
         $this->user = Auth::user();
         $this->cambiar_tab($this->tab);
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('livewire.pages.users.profile');
     }

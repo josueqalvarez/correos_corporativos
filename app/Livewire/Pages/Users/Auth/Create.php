@@ -14,7 +14,7 @@ class Create extends Component
     public string $password = '';
     public string $password_confirmation = '';
 
-    public function create_user()
+    public function create_user(): \Illuminate\Http\RedirectResponse
     {
         // Validate the input fields
         $this->validate([
@@ -37,7 +37,7 @@ class Create extends Component
         return redirect()->route('home')->with('success', 'Cuenta creada exitosamente. ¡Bienvenido!');
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('livewire.pages.users.auth.create');
     }
