@@ -24,9 +24,7 @@
                                 class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline text-sm">person</span>
                             <input
                                 class="w-full h-14 pl-12 pr-4 bg-surface-container-lowest border border-outline-variant rounded-xl font-body-base text-on-surface transition-all"
-                                id="fullname" 
-                                placeholder="Juan Pérez" type="text" 
-                                wire:model="fullname"/>
+                                id="fullname" placeholder="Juan Pérez" type="text" wire:model="fullname" />
                         </div>
                     </div>
                     <!-- Email -->
@@ -38,7 +36,7 @@
                                 class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline text-sm">alternate_email</span>
                             <input
                                 class="w-full h-14 pl-12 pr-4 bg-surface-container-lowest border border-outline-variant rounded-xl font-body-base text-on-surface transition-all"
-                                id="email" placeholder="hola@tuempresa.pe" type="email" wire:model="email"/>
+                                id="email" placeholder="hola@tuempresa.pe" type="email" wire:model="email" />
                         </div>
                     </div>
                     <!-- Password Cluster -->
@@ -51,7 +49,7 @@
                                     class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline text-sm">lock</span>
                                 <input
                                     class="w-full h-14 pl-12 pr-4 bg-surface-container-lowest border border-outline-variant rounded-xl font-body-base text-on-surface transition-all"
-                                    id="password" placeholder="••••••••" type="password" wire:model="password"/>
+                                    id="password" placeholder="••••••••" type="password" wire:model="password" />
                             </div>
                         </div>
                         <div class="space-y-2">
@@ -62,7 +60,8 @@
                                     class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline text-sm">enhanced_encryption</span>
                                 <input
                                     class="w-full h-14 pl-12 pr-4 bg-surface-container-lowest border border-outline-variant rounded-xl font-body-base text-on-surface transition-all"
-                                    id="confirm_password" placeholder="••••••••" type="password" wire:model="password_confirmation" />
+                                    id="confirm_password" placeholder="••••••••" type="password"
+                                    wire:model="password_confirmation" />
                             </div>
                         </div>
                     </div>
@@ -88,32 +87,17 @@
                             class="material-symbols-outlined text-[20px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
                     </button>
                 </form>
-                
-                
+
+
                 <div class="mt-8 pt-8 border-t border-outline-variant/30 flex flex-col items-center gap-4">
                     <p class="text-on-surface-variant text-sm">
                         ¿Ya tienes cuenta?
                         <a class="text-primary font-bold hover:text-secondary transition-colors underline-offset-4"
-                            href="#">Inicia sesión</a>
+                            href="{{ route('login') }}">Inicia sesión</a>
                     </p>
                 </div>
             </div>
         </div>
-        <!-- Trust Badges / Footer Info -->
-        <div
-            class="mt-stack-lg flex justify-between items-center px-4 opacity-60 grayscale hover:grayscale-0 transition-all duration-700">
-            <div class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-sm">shield_lock</span>
-                <span class="text-[11px] font-label-mono">ISO 27001 SECURE</span>
-            </div>
-            <div class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-sm">public</span>
-                <span class="text-[11px] font-label-mono">GLOBAL INFRASTRUCTURE</span>
-            </div>
-            <div class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-sm">verified_user</span>
-                <span class="text-[11px] font-label-mono">PCI DSS COMPLIANT</span>
-            </div>
-        </div>
+
     </div>
 </div>

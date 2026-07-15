@@ -2,16 +2,19 @@
 
 namespace App\Livewire\Pages\Users\Auth;
 
-use Livewire\Component;
+use App\Models\User;
 use Livewire\Attributes\Layout;
+use Livewire\Component;
 
 #[Layout('layouts.index')]
 class Create extends Component
 {
-
     public string $fullname = '';
+
     public string $email = '';
+
     public string $password = '';
+
     public string $password_confirmation = '';
 
     public function create_user()
@@ -23,9 +26,8 @@ class Create extends Component
             'password' => 'required|string|min:3|confirmed',
             'password_confirmation' => 'required',
         ]);
-
         // Create a new user
-        $user = \App\Models\User::create([
+        $user = User::create([
             'name' => $this->fullname,
             'email' => $this->email,
             'password' => bcrypt($this->password),
@@ -34,7 +36,8 @@ class Create extends Component
         auth()->login($user);
         session()->regenerate();
 
-        return redirect()->route('home')->with('success', 'Cuenta creada exitosamente. ¡Bienvenido!');
+        return redirect()->route('home')
+            ->with('success', 'Cuenta creada exitosamente. ¡Bienvenido!');
     }
 
     public function render()
