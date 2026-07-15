@@ -24,6 +24,7 @@ class BlogForm
                     ->required()
                     ->columnSpanFull(),
                 FileUpload::make('image')
+                    ->disk('public')
                     ->image(),
                 DateTimePicker::make('published_at')
                     ->default(now()),
