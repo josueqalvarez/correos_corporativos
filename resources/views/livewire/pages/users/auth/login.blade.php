@@ -9,7 +9,7 @@
             </h1>
         </div>
         <!-- Header Section -->
-        <div class="text-center md:text-left mb-stack-lg">
+        <div class="text-center mb-stack-lg">
             <h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">Bienvenido de nuevo</h2>
             <p class="font-body-base text-body-base text-on-surface-variant">Ingresa a tu panel de configuración</p>
         </div>
@@ -45,10 +45,11 @@
                         data-icon="lock">lock</span>
                     <input
                         class="w-full pl-12 pr-12 py-4 rounded-xl border-outline-variant bg-surface-container-low text-body-base focus:bg-white transition-all duration-200"
-                        id="password" placeholder="••••••••" required="" type="password" wire:model="password" />
+                        id="password" placeholder="••••••••" required=""
+                        type="{{ $passwordVisible ? 'text' : 'password' }}" wire:model="password" />
                     <button
-                        class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary transition-colors"
-                        type="button">
+                        class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary transition-colors cursor-pointer"
+                        type="button" wire:click="$toggle('passwordVisible')">
                         <span class="material-symbols-outlined" data-icon="visibility">visibility</span>
                     </button>
                     @error('password')
@@ -60,7 +61,7 @@
             <div class="flex items-center gap-2 text-center py-2">
                 <label class="flex items-center gap-3 cursor-pointer group">
                     <div class="relative">
-                        <input class="peer sr-only" type="checkbox" />
+                        <input class="peer sr-only" type="checkbox" wire:model="remember" />
                         <div
                             class="w-5 h-5 rounded border-2 border-outline-variant peer-checked:bg-primary peer-checked:border-primary transition-all duration-200 flex items-center justify-center">
                             <span
@@ -92,17 +93,6 @@
                     href=" {{ route('crear-cuenta') }} " wire:navigate>
                     Regístrate</a>
             </p>
-        </div>
-    </div>
-    <!-- Footer / Technical Compliance -->
-    <div class="mt-stack-md flex justify-center gap-6 text-on-surface-variant/50">
-        <div class="flex items-center gap-2">
-            <span class="material-symbols-outlined text-[16px]" data-icon="verified_user">verified_user</span>
-            <span class="font-label-mono text-[11px] uppercase tracking-widest">Secure 256-bit AES</span>
-        </div>
-        <div class="flex items-center gap-2">
-            <span class="material-symbols-outlined text-[16px]" data-icon="public">public</span>
-            <span class="font-label-mono text-[11px] uppercase tracking-widest">Peru Infrastructure</span>
         </div>
     </div>
 </div>

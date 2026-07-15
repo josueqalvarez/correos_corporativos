@@ -13,11 +13,11 @@ class Login extends Component
 {
     public string $email = '';
     public string $password = '';
+    public bool $passwordVisible = false;
+    public bool $remember = false;
 
     public function login()
     {
-
-        # Auth::attempt(['email' => $this->email, 'password' => $this->password]);
 
         $user = User::where('email', $this->email)->first();
 
@@ -31,10 +31,12 @@ class Login extends Component
             return;
         }
 
-        Auth::login($user);
-        session()->regenerate();
+        if (Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
+            Auth::login($user);
+            session()->regenerate();
+            return redirect()->intended(route('profile'));
+        }
 
-        return redirect()->intended(route('profile'));
     }
 
     public function mount()
