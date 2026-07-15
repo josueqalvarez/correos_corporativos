@@ -22,11 +22,46 @@
                                 <h3 class="font-bold text-primary">{{ $comment->user->name }}</h3>
                             </div>
 
-                            <p class="mt-3 text-on-surface-variant">
-                                {{ $comment->content }}
-                            </p>
+                            @if ($editar !== (string) $comment->id)
+                                <div class="group flex items-center justify-between gap-4">
+                                    <p class="mt-3 text-on-surface-variant">
+                                        {{ $comment->content }}
+                                    </p>
+                                    @if ($comment->user_id === $user->id)
+                                        <div class="mt-2 flex gap-3 opacity-0 transition-all duration-200 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:translate-y-0 group-focus-within:pointer-events-auto">
+                                            <button
+                                                class="text-sm font-medium text-error transition-colors hover:text-error/80 cursor-pointer"
+                                                wire:click='delete({{ $comment->id }})'>
+                                                Eliminar
+                                            </button>
+                                            <button
+                                                class="text-sm font-medium text-primary transition-colors hover:text-primary/80 cursor-pointer"
+                                                wire:click='edit({{ $comment->id }})'>
+                                                Editar
+                                            </button>
+                                        </div>
+                                    @endif
+                                </div>
+                            @else
+                                <textarea
+                                    class="mt-3 w-full rounded-2xl border border-outline-variant/30 bg-surface-container-lowest px-4 py-3 text-body-base outline-none ring-0 focus:border-secondary"
+                                    id="blog-response" placeholder="Edita tu comentario..." wire:model='content.{{ $comment->id }}'></textarea>
+                                <div class="mt-3 flex flex-wrap gap-3">
+                                    <button
+                                        class="rounded-full bg-primary px-4 py-2 font-bold text-on-primary transition-transform hover:scale-[1.01]"
+                                        wire:click.prevent='actualizar("{{ $comment->id }}")'>
+                                        Guardar
+                                    </button>
+                                    <button
+                                        class="rounded-full bg-outline-variant/20 px-4 py-2 font-bold text-on-surface-variant transition-transform hover:scale-[1.01]"
+                                        wire:click.prevent="edit('{{ $comment->id }}')">
+                                        Cancelar
+                                    </button>
+                                </div>
+                            @endif
 
-                            {{-- Escribir respuesta al comentario --}}
+
+                            {{-- Escribir respuesta al comentario // "RESPONDER" --}}
                             <div class="mt-4">
                                 @if ($validar_comentario !== (string) $comment->id)
                                     <a class="inline-flex cursor-pointer rounded-full px-3 py-1.5 text-sm font-medium text-on-surface-variant transition-colors hover:bg-surface-container-high"
@@ -55,7 +90,7 @@
                                 @endif
                             </div>
 
-                            {{-- Respuestas del comentario --}}
+                            {{-- Renderizar respuestas del comentario --}}
                             @if ($comment->replies()->exists())
                                 <div class="mt-4 space-y-3 border-l-2 border-outline-variant/30 pl-4 md:ml-8 md:pl-6">
                                     @foreach ($comment->replies()->latest()->get() as $reply)
@@ -69,16 +104,47 @@
                                                 <p class="text-sm font-semibold text-primary">{{ $reply->user->name }}
                                                 </p>
                                             </div>
-                                            <p class="mt-2 text-sm text-on-surface-variant">{{ $reply->content }}</p>
-                                            @if ($reply->user_id === $user->id)
-                                                <div class="mt-2 flex gap-3">
+
+
+                                            {{--  Contenido de la respuesta y posibilidad para editar --}}
+                                            @if ($editar !== (string) $reply->id)
+                                                <div class="group flex items-start justify-between gap-4">
+                                                    <p class="mt-2 text-sm text-on-surface-variant">{{ $reply->content }}
+                                                    </p>
+                                                    @if ($reply->user_id === $user->id)
+                                                        <div class="mt-2 flex gap-3 opacity-0 transition-all duration-200 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:translate-y-0 group-focus-within:pointer-events-auto">
+                                                        <button
+                                                            class="text-sm font-medium text-error transition-colors hover:text-error/80 cursor-pointer"
+                                                            wire:click='delete({{ $reply->id }})'>
+                                                            Eliminar
+                                                        </button>
+                                                        <button
+                                                            class="text-sm font-medium text-primary transition-colors hover:text-primary/80 cursor-pointer"
+                                                            wire:click='edit("{{ $reply->id }}")'>
+                                                            Editar
+                                                        </button>
+                                                    </div>
+                                                    @endif
+                                                </div>
+                                            @else
+                                                <textarea
+                                                    class="mt-3 w-full rounded-2xl border border-outline-variant/30 bg-surface-container-lowest px-4 py-3 text-body-base outline-none ring-0 focus:border-secondary"
+                                                    id="blog-response" placeholder="Edita tu comentario..." wire:model='content.{{ $reply->id }}'></textarea>
+                                                <div class="mt-3 flex flex-wrap gap-3">
                                                     <button
-                                                        class="text-sm font-medium text-error transition-colors hover:text-error/80 cursor-pointer"
-                                                        wire:click='delete({{ $reply->id }})'>
-                                                        Eliminar
+                                                        class="rounded-full bg-primary px-4 py-2 font-bold text-on-primary transition-transform hover:scale-[1.01]"
+                                                        wire:click.prevent='actualizar("{{ $reply->id }}")'>
+                                                        Guardar
+                                                    </button>
+                                                    <button
+                                                        class="rounded-full bg-outline-variant/20 px-4 py-2 font-bold text-on-surface-variant transition-transform hover:scale-[1.01]"
+                                                        wire:click.prevent="edit('{{ $reply->id }}')">
+                                                        Cancelar
                                                     </button>
                                                 </div>
                                             @endif
+
+
                                         </div>
                                     @endforeach
                                 </div>
@@ -108,7 +174,7 @@
                     class="rounded-full bg-primary px-6 py-3 font-bold text-on-primary transition-transform hover:scale-[1.01] cursor-pointer"
                     wire:click='save("blog")'>
                     Comentar
-                </button>   
+                </button>
             </div>
         </div>
 

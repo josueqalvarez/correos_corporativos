@@ -16,24 +16,33 @@ class CommentSection extends Component
     public User $user;
     public array $content = [];
     public ?string $validar_comentario = null;
+    public ?string $editar = null;
 
     // Methods ===========================
     public function delete(int $commentId)
     {
         $comment = Comment::find($commentId);
 
-        if ($comment && $comment->user_id === auth()->id()) {
+        if ($comment && $comment->user_id === $this->user->id) {
             $comment->delete();
         }
     }
+
+    public function edit(string $replyId)
+    {
+        $this->editar = $this->editar === $replyId ? null : $replyId;
+
+        $reply = Comment::find($replyId);
+        $this->content[$replyId] = $reply->content;
+    }
+
     public function save(?string $parentCommentId = null)
     {
 
         if (empty($this->content[$parentCommentId] ?? '')) {
-            $this->addError('content.' . $parentCommentId, 'El comentario no puede estar vacío.');    
+            $this->addError('content.' . $parentCommentId, 'El comentario no puede estar vacío.');
             return;
-        }
-        else if (auth()->guest()) {
+        } else if (auth()->guest()) {
             return redirect()->route('login');
         }
 
@@ -49,6 +58,23 @@ class CommentSection extends Component
         $this->content[$parentCommentId] = '';
 
         $this->toggleReplyForm($parentCommentId);
+    }
+
+    public function actualizar(string $replyId)
+    {
+        if (empty($this->content[$replyId] ?? '')) {
+            $this->addError('content.' . $replyId, 'El comentario no puede estar vacío.');
+            return;
+        }
+
+        $reply = Comment::find($replyId);
+
+        $reply->update([
+            'content' => $this->content[$replyId],
+            'updated_at' => now(),
+        ]);
+
+        $this->editar = null;
     }
 
     public function toggleReplyForm(?string $parentCommentId = null)
