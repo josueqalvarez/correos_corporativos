@@ -1,0 +1,151 @@
+<div>
+    <!-- Breadcrumbs -->
+    <div
+        class="page-shell-wide grid grid-cols-1 items-start gap-8 py-section-padding lg:grid-cols-12 lg:gap-stack-lg">
+        <!-- Article Body (Center/Left) -->
+        <article class="lg:col-span-8">
+            <!-- Header -->
+            <x.header>
+                <div class="mb-12">
+                    <div
+                        class="mb-8 flex items-center gap-2 font-label-mono text-label-mono uppercase tracking-wider text-on-surface-variant">
+                        <a class="hover:text-secondary transition-colors" href="#">Blog</a>
+                    </div>
+                    <h1
+                        class="font-headline-lg text-headline-xl md:text-display-xl-mobile lg:text-display-xl mb-6 text-primary leading-tight ">
+                        {{ $blog_searched['title'] }}
+                    </h1>
+                    <div
+                        class="flex flex-wrap items-center gap-6 text-on-surface-variant font-label-mono text-label-mono">
+                        {{-- <div class="flex items-center gap-2">
+                            <div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center">
+                                <span class="material-symbols-outlined text-on-secondary-container">person</span>
+                            </div>
+                            <span>Por Staff MailCorp</span>
+                        </div> --}}
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined">calendar_today</span>
+                            <span>
+                                {{ $blog_searched['updated_at'] == $blog_searched['created_at'] ? 'Creado: ' : 'Actualizado el ' }}
+                                {{ $blog_searched['updated_at']->format('d/m/Y') }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </x.header>
+            <!-- Featured Image -->
+            <div class="rounded-3xl overflow-hidden mb-12 shadow-2xl">
+                <img class="w-full h-auto aspect-video object-cover"
+                    data-alt="A professional high-fidelity digital rendering of a sleek laptop displaying a clean Zoho Mail interface with a customized business domain email. The scene is set in a modern, brightly lit office environment with soft glassmorphism accents and a corporate navy and teal color palette. Soft ambient light illuminates the silver laptop while technical network diagrams float subtly in the blurred background, conveying a sense of advanced cloud infrastructure and reliability."
+                    src=" {{ asset('storage/' . $blog_searched['image']) }} " />
+            </div>
+            <!-- Content Intro -->
+            <div class="prose prose-lg max-w-none text-on-surface-variant leading-relaxed">
+                <p class="text-subheading font-subheading mb-8">
+                    {{ $blog_searched['description'] }}
+                </p>
+
+                <h2 class="font-headline-lg text-headline-lg text-primary mt-12 mb-6" id="spf">¿Qué es un registro
+                    SPF y por qué lo necesitas?</h2>
+                <p class="mb-6">
+                    {{ $blog_searched['content'] }}
+                </p>
+                
+                <!-- FAQ Section -->
+                <section class="mt-16 bg-surface-container-low p-8 md:p-12 rounded-3xl" id="faq">
+                    <h2 class="font-headline-lg text-headline-lg text-primary mb-8 text-center">Preguntas Frecuentes
+                    </h2>
+                    <div class="space-y-4">
+                        <details
+                            class="group bg-surface-container-lowest rounded-2xl border border-outline-variant/20 overflow-hidden"
+                            open="">
+                            <summary class="flex cursor-pointer list-none items-center justify-between p-5 md:p-6">
+                                <span class="font-bold text-primary">¿Cuánto tiempo tarda en propagarse el DNS?</span>
+                                <span
+                                    class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+                            </summary>
+                            <div class="px-6 pb-6 text-on-surface-variant">
+                                Generalmente los cambios en los registros MX y SPF toman entre 30 minutos y 24 horas en
+                                propagarse globalmente, dependiendo de tu proveedor de dominio.
+                            </div>
+                        </details>
+                        <details
+                            class="group bg-surface-container-lowest rounded-2xl border border-outline-variant/20 overflow-hidden">
+                            <summary class="flex cursor-pointer list-none items-center justify-between p-5 md:p-6">
+                                <span class="font-bold text-primary">¿Puedo migrar mis correos antiguos de Gmail?</span>
+                                <span
+                                    class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+                            </summary>
+                            <div class="px-6 pb-6 text-on-surface-variant">
+                                Sí, Zoho Mail incluye una herramienta de migración gratuita que permite importar todos
+                                tus correos, carpetas y contactos mediante IMAP/POP o directamente desde la API de
+                                Google Workspace.
+                            </div>
+                        </details>
+                    </div>
+                </section>
+
+                <!-- Comments Section -->
+                <livewire:pages.blog.comment-section :blog="$blog_searched" />
+            </div>
+        </article>
+        <!-- Sidebar -->
+        <aside class="space-y-8 lg:col-span-4 lg:sticky lg:top-23">
+            <!-- Related Posts -->
+            <div class="bg-surface-container-lowest p-8 rounded-3xl border border-outline-variant/20">
+                <h4 class="font-bold text-primary mb-6">Artículos relacionados</h4>
+                <div class="space-y-6">
+                    <a class="group block" href="#">
+                        <div class="flex gap-4">
+                            <div class="w-20 h-20 shrink-0 rounded-xl overflow-hidden">
+                                <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                    data-alt="A clean graphic showing the Microsoft 365 logo on a bright white background with subtle blue gradients. The image evokes a feeling of corporate productivity, cloud integration, and professional software solutions, matching a light-mode SaaS aesthetic."
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDe74n2HJzoPAoOOSCTCOc5mz5G-Q0r2YrbbSF_yE4u_wpLdTvhQyfKksnScROLDgUQwrAXQxYdvQbc-9lnIB56W1Jxt81We3460VAFLpXncxJahYpZuE9XPDDCIeHYd0GBmIZfSj3WnFg0XjbGQjxbzIi94gyav6d2_DRYwEnM0S1TrPaMO-poNqRaljFeAqGob29vV1K2pDMKlQoT_PUMcJbB78xtIw0hScPS6RE2oV0cbpND_7Kzzg" />
+                            </div>
+                            <div>
+                                <p
+                                    class="font-bold text-body-base group-hover:text-secondary transition-colors leading-tight">
+                                    Configurando Microsoft 365 para PYMEs</p>
+                                <p class="text-label-mono text-on-surface-variant mt-1">Soporte • 5 min</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a class="group block" href="#">
+                        <div class="flex gap-4">
+                            <div class="w-20 h-20 shrink-0 rounded-xl overflow-hidden">
+                                <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                    data-alt="Abstract cybersecurity concept with glowing blue lock icons and shield patterns overlaid on a minimalist white background. The visual style is technical, secure, and modern, representing advanced email encryption and data protection for business communications."
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuANoyIu8WKetpsAWjodMX7074jC3N2QQpnNBMY_0PC7PEtkELgoB39Ayc43FtoT6nAW1SfOaWfgNf4wJ7cXkk3dkGAfra0cBjbErCAEiME4gHbZp4T2PnxubKq8ZfqV6p9bGgkwXarlD5Uot0dsuDYbgM8_BB8JVRJhLrOHqrK7IHYZn1Ojb7dRDYghDSC3Z5xk1cywmS1StScHCgn91xAaQl3GnK8jUfNmy59Eh5VcBwKJy9-KSu90Hg" />
+                            </div>
+                            <div>
+                                <p
+                                    class="font-bold text-body-base group-hover:text-secondary transition-colors leading-tight">
+                                    Seguridad: Activando el 2FA en tu cuenta</p>
+                                <p class="text-label-mono text-on-surface-variant mt-1">Seguridad • 8 min</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!-- Newsletter / CTA Card -->
+            <div class="bg-primary text-on-primary p-8 rounded-3xl relative overflow-hidden shadow-2xl">
+                <div class="relative z-10">
+                    <h4 class="font-headline-md text-headline-md mb-4">¿Prefieres que nosotros configuremos todo por
+                        ti?</h4>
+                    <p class="opacity-80 mb-6 text-body-base">Ahorra tiempo y evita errores técnicos. Servicio de
+                        configuración express disponible.</p>
+                    <button
+                        class="w-full bg-secondary-fixed text-on-secondary-fixed py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-white transition-colors active:scale-95 duration-200">
+                        <span class="material-symbols-outlined"
+                            style="font-variation-settings: 'FILL' 1;">phone_iphone</span>
+                        WhatsApp Corporativo
+                    </button>
+                </div>
+                <!-- Decorative background pattern -->
+                <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-secondary opacity-20 blur-3xl rounded-full">
+                </div>
+            </div>
+        </aside>
+    </div>
+
+</div>
